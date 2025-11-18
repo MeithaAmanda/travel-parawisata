@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Mitra — TripNesia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100">
+
+  <!-- LAYOUT WRAPPER -->
+  <div class="flex h-screen">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-white border-r hidden md:block">
+      <div class="p-6 border-b">
+        <h1 class="text-2xl font-bold text-indigo-600">TripNesia</h1>
+        <p class="text-sm text-gray-500">Dashboard Mitra</p>
+      </div>
+
+      <nav class="p-4 space-y-2">
+        <a href="#" class="block px-4 py-2 rounded-md bg-indigo-600 text-white font-medium">Dashboard</a>
+        <a href="#" class="block px-4 py-2 rounded-md hover:bg-gray-100">Paket Wisata</a>
+        <a href="#" class="block px-4 py-2 rounded-md hover:bg-gray-100">Pesanan</a>
+        <a href="#" class="block px-4 py-2 rounded-md hover:bg-gray-100">Pendapatan</a>
+        <a href="#" class="block px-4 py-2 rounded-md hover:bg-gray-100">Ulasan</a>
+        <a href="#" class="block px-4 py-2 rounded-md hover:bg-gray-100">Pengaturan</a>
+        <a href="/logout" class="block px-4 py-2 mt-4 rounded-md bg-red-500 text-white">Logout</a>
+      </nav>
+    </aside>
+
+    <!-- CONTENT -->
+    <div class="flex-1 flex flex-col">
+
+      <!-- TOPBAR -->
+      <header class="bg-white shadow p-4 flex justify-between items-center">
+        <h2 class="text-xl font-semibold text-gray-700">Dashboard Mitra</h2>
+        <div class="flex items-center gap-3">
+          <span class="text-gray-600">Halo, Mitra!</span>
+          <img src="https://i.pravatar.cc/40" class="w-10 h-10 rounded-full border">
+        </div>
+      </header>
+
+      <!-- MAIN CONTENT -->
+      <main class="p-6 overflow-y-auto">
+
+        <!-- CARDS -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+
+          <div class="bg-white p-6 shadow rounded-xl">
+            <p class="text-gray-500">Pesanan Masuk</p>
+            <h3 class="text-3xl font-bold">27</h3>
+          </div>
+
+          <div class="bg-white p-6 shadow rounded-xl">
+            <p class="text-gray-500">Pendapatan Bulan Ini</p>
+            <h3 class="text-3xl font-bold">Rp 12.450.000</h3>
+          </div>
+
+          <div class="bg-white p-6 shadow rounded-xl">
+            <p class="text-gray-500">Paket Aktif</p>
+            <h3 class="text-3xl font-bold">8</h3>
+          </div>
+
+          <div class="bg-white p-6 shadow rounded-xl">
+            <p class="text-gray-500">Rating Mitra</p>
+            <h3 class="text-3xl font-bold">4.9 ★</h3>
+          </div>
+
+        </div>
+
+        <!-- TABEL PESANAN -->
+        <div class="bg-white p-6 shadow rounded-xl">
+          <h3 class="text-xl font-semibold mb-4">Pesanan Terbaru</h3>
+
+          <div class="overflow-x-auto">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr class="bg-gray-100 text-left text-sm">
+                  <th class="p-3">Nama Pemesan</th>
+                  <th class="p-3">Paket</th>
+                  <th class="p-3">Tanggal</th>
+                  <th class="p-3">Status</th>
+                  <th class="p-3">Aksi</th>
+                </tr>
+              </thead>
+
+              <tbody class="text-sm">
+
+                <tr class="border-b">
+                  <td class="p-3">Rizky Ramadhan</td>
+                  <td class="p-3">Trip Bromo Sunrise</td>
+                  <td class="p-3">21 Nov 2025</td>
+                  <td class="p-3">
+                    <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs">Menunggu</span>
+                  </td>
+                  <td class="p-3">
+                    <button class="text-indigo-600 hover:underline">Detail</button>
+                  </td>
+                </tr>
+
+                <tr class="border-b">
+                  <td class="p-3">Sinta Lestari</td>
+                  <td class="p-3">Explore Nusa Penida</td>
+                  <td class="p-3">20 Nov 2025</td>
+                  <td class="p-3">
+                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">Selesai</span>
+                  </td>
+                  <td class="p-3">
+                    <button class="text-indigo-600 hover:underline">Detail</button>
+                  </td>
+                </tr>
+
+                <tr class="border-b">
+                  <td class="p-3">Dewi Anggraini</td>
+                  <td class="p-3">Paket Lombok 3D2N</td>
+                  <td class="p-3">19 Nov 2025</td>
+                  <td class="p-3">
+                    <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs">Dibatalkan</span>
+                  </td>
+                  <td class="p-3">
+                    <button class="text-indigo-600 hover:underline">Detail</button>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </main>
+
+    </div>
+  </div>
+
+</body>
+</html>
