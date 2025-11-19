@@ -1,0 +1,197 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* BODY */
+body {
+  background: #eef1f5;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 250px;
+  background: #1d2939;
+  color: white;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  transition: 0.3s ease;
+  overflow-y: auto;
+}
+
+/* full hide sidebar */
+.sidebar.hidden {
+  transform: translateX(-260px);
+}
+
+.main-content.full {
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+
+.sidebar.collapsed {
+  width: 75px;
+}
+
+.sidebar h2 {
+  font-size: 22px;
+  margin-bottom: 25px;
+}
+
+/* NAV LIST */
+.nav-section {
+  margin-bottom: 15px;
+}
+
+.nav-title {
+  font-size: 13px;
+  color: #c8cdd5;
+  margin-bottom: 8px;
+  margin-left: 5px;
+}
+
+.nav-list a {
+  display: block;
+  padding: 10px 14px;
+  background: #2c3a4d;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #fff;
+  transition: 0.2s;
+}
+
+.nav-list a:hover,
+.nav-list .active {
+  background: #16a34a;
+}
+
+/* DROPDOWN */
+.dropdown-btn {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #2c3a4d;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* SUBMENU */
+.dropdown-items {
+  display: none;
+  padding-left: 15px;
+  margin-top: 5px;
+}
+
+.dropdown.open .dropdown-items {
+  display: block;
+}
+
+/* SUBMENU ITEM (DIPERKECIL) */
+.dropdown-items a {
+  display: block;
+  padding: 7px 12px;
+  font-size: 13px;
+  background: #2f3b4c;
+  margin: 4px 0;
+  border-radius: 5px;
+  padding-left: 22px;
+  color: white;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.dropdown-items a:hover {
+  background: #3b4a5e;
+}
+
+/* MAIN */
+.main {
+  margin-left: 250px;
+  padding: 25px;
+  width: calc(100% - 250px);
+  transition: 0.3s ease;
+}
+
+.sidebar.collapsed ~ .main {
+  margin-left: 75px;
+  width: calc(100% - 75px);
+}
+
+/* TOGGLE BUTTON */
+.toggle-btn {
+  font-size: 25px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* TOP BAR (UNTUK JARAK H1 + BUTTON) */
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+/* DASHBOARD CARDS */
+.cards {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  padding: 22px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.card-title {
+  font-size: 16px;
+  color: #545657;
+}
+
+.card-number {
+  font-size: 32px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* responsive */
+@media (max-width: 800px) {
+  .sidebar {
+    position: fixed;
+    z-index: 10;
+  }
+
+  .main {
+    margin-left: 75px !important;
+    width: calc(100% - 75px);
+  }
+}
+
+/* jika sidebar disembunyikan penuh */
+.sidebar.hidden ~ .main {
+  margin-left: 0 !important;
+  width: 100% !important;
+}
+
+/* backbground */
+body {
+  background: url("/assets/images/BG1.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+

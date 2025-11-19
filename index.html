@@ -7,16 +7,12 @@
   <title>TripNesia — Paket Wisata Terbaik</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <meta name="description" content="TripNesia - Paket wisata terbaik untuk menjelajahi keindahan Indonesia. Temukan paket wisata, review pelanggan, dan pesan sekarang.">
+  <meta name="description" content="TripNesia - Paket wisata terbaik untuk menjelajahi keindahan Indonesia.">
   <link rel="icon" href="/assets/images/favicon.ico" />
 
   <style>
     :root { --accent: #4f46e5; }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-    }
-
+    body { font-family: 'Poppins', sans-serif; }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -29,44 +25,36 @@
 
 <body class="bg-gradient-to-b from-gray-50 to-white text-gray-800">
 
-  <!-- HEADER: navigasi atas -->
   <header class="sticky top-0 z-50 bg-white/60 backdrop-blur-sm">
     <div class="container mx-auto px-6 py-4 flex items-center justify-between">
-      <!-- Logo dan nama -->
       <a href="#" class="flex items-center gap-3">
-        <!-- Kotak logo sederhana -->
-        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-600 to-indigo-400 flex items-center justify-center text-white font-bold">
-          T
-        </div>
+        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-600 to-indigo-400 flex items-center justify-center text-white font-bold">T</div>
         <span class="text-2xl font-semibold text-indigo-700">TripNesia</span>
       </a>
 
-      <!-- Link navigasi untuk desktop -->
-      <nav class="hidden md:flex items-center gap-6">
-        <!-- Komentar: tautan navigasi utama -->
+      <nav id="desktop-nav" class="hidden md:flex items-center gap-6">
         <a href="#destinasi" class="text-gray-600 hover:text-indigo-600 transition">Destinasi</a>
         <a href="/paket wisata.html" class="text-gray-600 hover:text-indigo-600 transition">Paket Wisata</a>
         <a href="#testimoni" class="text-gray-600 hover:text-indigo-600 transition">Testimoni</a>
-        <a href="/login.html" class="text-indigo-700 hover:underline">Login</a>
-        <a href="/regist_akun.html" class="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 transition">Daftar</a>
+        
+        <div id="auth-buttons" class="flex items-center gap-4">
+            <a href="/login.html" class="text-indigo-700 hover:underline">Login</a>
+            <a href="/regist_akun.html" class="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 transition">Daftar</a>
+        </div>
       </nav>
 
-      <!-- Mobile menu: checkbox-only-->
       <div class="md:hidden">
         <input id="menu-toggle" type="checkbox" class="peer hidden" />
         <label for="menu-toggle" class="p-2 rounded-md inline-flex items-center justify-center text-gray-700 cursor-pointer">
-          <!-- Icon garis -->
-          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </label>
       </div>
     </div>
 
-    <!-- Mobile menu content (muncul saat checkbox di-check; CSS-only) -->
     <div class="peer-checked:block hidden md:hidden bg-white border-t border-gray-100">
-      <div class="px-6 pt-4 pb-6 space-y-3">
-        <!-- Komentar: tautan menu mobile -->
+      <div class="px-6 pt-4 pb-6 space-y-3" id="mobile-menu-items">
         <a href="#destinasi" class="block text-gray-700 hover:text-indigo-600">Destinasi</a>
         <a href="/paket wisata.html" class="block text-gray-700 hover:text-indigo-600">Paket Wisata</a>
         <a href="#testimoni" class="block text-gray-700 hover:text-indigo-600">Testimoni</a>
@@ -76,235 +64,205 @@
     </div>
   </header>
 
-  <!-- MAIN: konten utama -->
   <main>
-
-    <!-- HERO: full-bleed (mengisi seluruh viewport), background BG1.jpg, tanpa shape/gelombang -->
     <section class="relative h-screen bg-cover bg-center" style="background-image: url('/assets/images/BG1.jpg');">
-      <!-- Overlay gelap tipis agar teks tetap terbaca -->
       <div class="absolute inset-0 bg-black/40"></div>
-
-      <!-- Kontainer konten hero (judul + deskripsi + search) -->
       <div class="relative z-10 flex flex-col justify-center items-center h-full text-white text-center px-6">
-        <!-- Judul utama -->
         <h1 class="text-4xl md:text-6xl font-extrabold mb-4 animate-fade-up">Temukan Petualangan Anda Berikutnya</h1>
-
-        <!-- SEARCH BAR: input + tombol cari -->
-        <form class="w-full max-w-2xl mx-auto px-2" role="search" aria-label="Pencarian paket atau destinasi">
+        <form class="w-full max-w-2xl mx-auto px-2">
           <div class="flex gap-3 items-center bg-white/95 rounded-full p-1 shadow-lg ring-0 focus-within:ring-4 focus-within:ring-indigo-200 transition animate-fade-up" style="animation-delay: 160ms;">
-            <!-- Input teks pencarian -->
-            <input
-              type="search"
-              name="q"
-              placeholder="Cari destinasi, paket, atau lokasi (contoh: Bali, Bromo)"
-              class="flex-1 bg-transparent px-4 py-3 rounded-full text-gray-700 placeholder-gray-400 focus:outline-none focus:placeholder-gray-300"
-              aria-label="Cari destinasi atau paket" />
-
-            <!-- Tombol pencarian -->
-            <button
-              type="submit"
-              class="ml-1 bg-indigo-600 text-white px-5 py-3 rounded-full font-semibold shadow-md hover:scale-105 hover:-translate-y-1 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-indigo-300">
-              Cari
-            </button>
-          </div>
-
-          <!-- Bantuan visual kecil: opsi pencarian populer (opsional, tampil di desktop) -->
-          <div class="hidden md:flex justify-center gap-4 mt-4 text-sm text-indigo-100/80">
-            <span class="opacity-80">Populer:</span>
-            <a href="/paket wisata.html" class="hover:underline">Bali</a>
-            <span aria-hidden="true">•</span>
-            <a href="/paket wisata.html" class="hover:underline">Bromo</a>
-            <span aria-hidden="true">•</span>
-            <a href="/paket wisata.html" class="hover:underline">Komodo</a>
+            <input type="search" placeholder="Cari destinasi (contoh: Bali, Bromo)" class="flex-1 bg-transparent px-4 py-3 rounded-full text-gray-700 placeholder-gray-400 focus:outline-none" />
+            <button type="submit" class="ml-1 bg-indigo-600 text-white px-5 py-3 rounded-full font-semibold shadow-md hover:scale-105 hover:-translate-y-1 transition-transform duration-300">Cari</button>
           </div>
         </form>
-
-        <!-- CTA kecil: tombol lihat paket dan jelajahi destinasi -->
         <div class="mt-8 flex gap-4">
           <a href="#paket" class="bg-white/10 hover:bg-white/20 text-white px-5 py-3 rounded-full font-medium transition transform hover:-translate-y-1">Lihat Paket</a>
           <a href="#destinasi" class="bg-white/10 hover:bg-white/20 text-white px-5 py-3 rounded-full font-medium transition transform hover:-translate-y-1">Jelajahi Destinasi</a>
         </div>
       </div>
-      <!-- Tidak ada SVG gelombang atau bentuk tambahan di sini sesuai permintaan -->
     </section>
 
-    <!-- SECTION: Destinasi Populer -->
     <section id="destinasi" class="py-20">
       <div class="container mx-auto px-6">
         <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Destinasi Populer</h2>
-
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <!-- Kartu 1: Bali -->
-          <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:-translate-y-2 transform transition">
-            <img src="/assets/images/bali.jpg" alt="Bali" class="w-full h-48 object-cover">
+          
+          <article class="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 cursor-pointer group">
+            <img src="/assets/images/bali.jpg" alt="Bali" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
             <div class="p-6">
-              <h3 class="font-bold text-xl">Bali</h3>
+              <h3 class="font-bold text-xl text-gray-800">Bali</h3>
+              <p class="text-sm text-gray-500 mt-2">Pulau Dewata dengan keindahan pantai.</p>
             </div>
           </article>
 
-          <!-- Kartu 2: Raja Ampat -->
-          <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:-translate-y-2 transform transition">
-            <img src="/assets/images/rajaampat.jpg" alt="Raja Ampat" class="w-full h-48 object-cover">
+          <article class="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 cursor-pointer group">
+            <img src="/assets/images/rajaampat.jpg" alt="Raja Ampat" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
             <div class="p-6">
-              <h3 class="font-bold text-xl">Raja Ampat</h3>
+              <h3 class="font-bold text-xl text-gray-800">Raja Ampat</h3>
+              <p class="text-sm text-gray-500 mt-2">Surga penyelam dunia di Papua.</p>
             </div>
           </article>
 
-          <!-- Kartu 3: Bromo -->
-          <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:-translate-y-2 transform transition">
-            <img src="/assets/images/bromo.jpg" alt="Bromo" class="w-full h-48 object-cover">
+          <article class="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 cursor-pointer group">
+            <img src="/assets/images/bromo.jpg" alt="Bromo" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
             <div class="p-6">
-              <h3 class="font-bold text-xl">Gunung Bromo</h3>
+              <h3 class="font-bold text-xl text-gray-800">Gunung Bromo</h3>
+              <p class="text-sm text-gray-500 mt-2">Matahari terbit yang memukau.</p>
             </div>
           </article>
 
-          <!-- Kartu 4: Labuan Bajo -->
-          <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:-translate-y-2 transform transition">
-            <img src="/assets/images/labuanbajo2.jpg" alt="Labuan Bajo" class="w-full h-48 object-cover">
+          <article class="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 cursor-pointer group">
+            <img src="/assets/images/labuanbajo2.jpg" alt="Labuan Bajo" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
             <div class="p-6">
-              <h3 class="font-bold text-xl">Labuan Bajo</h3>
+              <h3 class="font-bold text-xl text-gray-800">Labuan Bajo</h3>
+              <p class="text-sm text-gray-500 mt-2">Gerbang menuju Pulau Komodo.</p>
             </div>
           </article>
+
         </div>
       </div>
     </section>
 
-    <!-- SECTION: Pilihan Paket Wisata -->
     <section id="paket" class="py-20 bg-white">
       <div class="container mx-auto px-6">
         <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Pilihan Paket Wisata</h2>
-
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Paket 1 -->
+          
           <article class="border border-gray-100 rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-2 overflow-hidden">
-            <img src="/assets/images/baliculture.png" alt="Jelajah Budaya Bali" class="w-full h-56 object-cover">
+            <img src="/assets/images/baliculture.png" alt="Bali" class="w-full h-56 object-cover">
             <div class="p-6 flex flex-col h-full">
               <h3 class="text-2xl font-bold mb-1">Jelajah Budaya Bali</h3>
-              <p class="text-sm text-gray-500 mb-4">4 Hari 3 Malam • Tur budaya & pantai.</p>
+              <p class="text-sm text-gray-500 mb-4">4 Hari 3 Malam</p>
               <div class="mt-auto flex items-end justify-between">
-                <div>
-                  <div class="text-2xl font-extrabold text-indigo-600">Rp 2.500.000</div>
-                  <div class="text-xs text-gray-400">per orang</div>
-                </div>
-                <div class="flex flex-col items-end gap-2">
-                  <a href="/paket wisata.html" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold hover:scale-105 transition">Pesan Sekarang</a>
-                </div>
+                <div><div class="text-2xl font-extrabold text-indigo-600">Rp 2.500.000</div></div>
+                <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold">Pesan</a>
               </div>
             </div>
           </article>
 
-          <!-- Paket 2 -->
           <article class="border border-gray-100 rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-2 overflow-hidden">
-            <img src="/assets/images/bromoad.webp" alt="Sunrise di Bromo" class="w-full h-56 object-cover">
+            <img src="/assets/images/bromoad.webp" alt="Bromo" class="w-full h-56 object-cover">
             <div class="p-6 flex flex-col h-full">
               <h3 class="text-2xl font-bold mb-1">Sunrise di Bromo</h3>
-              <p class="text-sm text-gray-500 mb-4">2 Hari 1 Malam • Trip singkat & epik.</p>
+              <p class="text-sm text-gray-500 mb-4">2 Hari 1 Malam</p>
               <div class="mt-auto flex items-end justify-between">
-                <div>
-                  <div class="text-2xl font-extrabold text-indigo-600">Rp 1.200.000</div>
-                  <div class="text-xs text-gray-400">per orang</div>
-                </div>
-                <div>
-                  <a href="/paket wisata.html" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold hover:scale-105 transition">Pesan Sekarang</a>
-                </div>
+                <div><div class="text-2xl font-extrabold text-indigo-600">Rp 1.200.000</div></div>
+                <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold">Pesan</a>
               </div>
             </div>
           </article>
 
-          <!-- Paket 3 -->
           <article class="border border-gray-100 rounded-2xl shadow hover:shadow-2xl transition transform hover:-translate-y-2 overflow-hidden">
-            <img src="/assets/images/komodoadv.jpg" alt="Petualangan Komodo" class="w-full h-56 object-cover">
+            <img src="/assets/images/komodoadv.jpg" alt="Komodo" class="w-full h-56 object-cover">
             <div class="p-6 flex flex-col h-full">
               <h3 class="text-2xl font-bold mb-1">Petualangan Komodo</h3>
-              <p class="text-sm text-gray-500 mb-4">3 Hari 2 Malam • Snorkel & nature walk.</p>
+              <p class="text-sm text-gray-500 mb-4">3 Hari 2 Malam</p>
               <div class="mt-auto flex items-end justify-between">
-                <div>
-                  <div class="text-2xl font-extrabold text-indigo-600">Rp 3.000.000</div>
-                  <div class="text-xs text-gray-400">per orang</div>
-                </div>
-                <div>
-                  <a href="/paket wisata.html" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold hover:scale-105 transition">Pesan Sekarang</a>
-                </div>
+                <div><div class="text-2xl font-extrabold text-indigo-600">Rp 3.000.000</div></div>
+                <a href="#" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold">Pesan</a>
               </div>
             </div>
           </article>
-        </div>
 
-        <!-- Tombol lihat paket lainnya -->
-        <div class="flex justify-center mt-12">
-          <a href="/paket wisata.html" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full font-semibold shadow-lg transition">Lihat Paket Wisata Lainnya</a>
         </div>
       </div>
     </section>
 
-    <!-- SECTION: Testimoni -->
     <section id="testimoni" class="py-20">
       <div class="container mx-auto px-6">
         <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Apa Kata Mereka?</h2>
-
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <!-- Testimoni 1 -->
           <div class="bg-white p-8 rounded-lg shadow-lg">
-            <div class="mb-4 text-yellow-400 flex justify-center gap-1">
-              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 15l-5.878 3.09L5.6 11.545 1 7.455l6.06-.545L10 1l2.94 5.91L19 7.455l-4.6 4.09 1.478 6.545z"/></svg>
-              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 15l-5.878 3.09L5.6 11.545 1 7.455l6.06-.545L10 1l2.94 5.91L19 7.455l-4.6 4.09 1.478 6.545z"/></svg>
-              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 15l-5.878 3.09L5.6 11.545 1 7.455l6.06-.545L10 1l2.94 5.91L19 7.455l-4.6 4.09 1.478 6.545z"/></svg>
-              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 15l-5.878 3.09L5.6 11.545 1 7.455l6.06-.545L10 1l2.94 5.91L19 7.455l-4.6 4.09 1.478 6.545z"/></svg>
-              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 15l-5.878 3.09L5.6 11.545 1 7.455l6.06-.545L10 1l2.94 5.91L19 7.455l-4.6 4.09 1.478 6.545z"/></svg>
-            </div>
-            <p class="text-gray-600 italic mb-4">"Pengalaman yang luar biasa! Semuanya diatur dengan baik, pemandunya ramah dan profesional."</p>
+            <p class="text-gray-600 italic mb-4">"Pengalaman yang luar biasa! Semuanya diatur dengan baik."</p>
             <p class="font-semibold text-gray-800">— Budi Santoso</p>
           </div>
-
-          <!-- Testimoni 2 -->
           <div class="bg-white p-8 rounded-lg shadow-lg">
-            <div class="mb-4 text-indigo-600">
-              <span class="text-sm font-semibold">4.8 • Sangat Memuaskan</span>
-            </div>
-            <p class="text-gray-600 italic mb-4">"Paket wisatanya sangat sepadan dengan harganya. Destinasi yang dikunjungi sangat indah."</p>
+            <p class="text-gray-600 italic mb-4">"Sangat sepadan dengan harganya. Indah sekali."</p>
             <p class="font-semibold text-gray-800">— Citra Lestari</p>
           </div>
-
-          <!-- Testimoni 3 -->
           <div class="bg-white p-8 rounded-lg shadow-lg">
-            <div class="mb-4 text-yellow-400 flex justify-center gap-1">
-              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 15l-5.878 3.09L5.6 11.545 1 7.455l6.06-.545L10 1l2.94 5.91L19 7.455l-4.6 4.09 1.478 6.545z"/></svg>
-              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 15l-5.878 3.09L5.6 11.545 1 7.455l6.06-.545L10 1l2.94 5.91L19 7.455l-4.6 4.09 1.478 6.545z"/></svg>
-              <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10 15l-5.878 3.09L5.6 11.545 1 7.455l6.06-.545L10 1l2.94 5.91L19 7.455l-4.6 4.09 1.478 6.545z"/></svg>
-            </div>
-            <p class="text-gray-600 italic mb-4">"Liburan keluarga jadi sangat mudah dan menyenangkan. Anak-anak sangat senang."</p>
+            <p class="text-gray-600 italic mb-4">"Liburan keluarga jadi sangat mudah dan menyenangkan."</p>
             <p class="font-semibold text-gray-800">— Agus Wijaya</p>
           </div>
         </div>
-
-        <!-- Tombol lihat ulasan lainnya -->
-        <div class="flex justify-center mt-10">
-          <a href="/testimoni.html" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full font-semibold shadow-lg transition">Lihat Ulasan Lainnya</a>
-        </div>
       </div>
     </section>
-
   </main>
 
-  <!-- FOOTER -->
   <footer class="bg-gray-900 text-gray-300 py-8">
     <div class="container mx-auto px-6 text-center">
-      <div class="md:flex md:justify-between md:items-center">
-        <div class="mb-4 md:mb-0">
-          <a href="#" class="text-2xl font-bold text-white">TripNesia</a>
-          <p class="text-gray-400 text-sm">Paket wisata terpercaya menjelajahi Indonesia sejak 2020</p>
-        </div>
-
-        <div class="space-x-4">
-          <a href="#destinasi" class="text-gray-300 hover:text-white">Destinasi</a>
-          <a href="/paket wisata.html" class="text-gray-300 hover:text-white">Paket</a>
-          <a href="#testimoni" class="text-gray-300 hover:text-white">Testimoni</a>
-        </div>
-      </div>
-
-      <div class="mt-6 text-gray-500 text-sm">&copy; TripNesia 2025. All Rights Reserved.</div>
+      <p class="text-gray-500 text-sm">&copy; TripNesia 2025. All Rights Reserved.</p>
     </div>
   </footer>
-</body>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // --- IMPLEMENTASI 1: Efek Interaktif pada Kartu (Mouseover/Mouseout) ---
+      // Kita menargetkan elemen <article> yang ada di dalam section #destinasi
+      const destinationCards = document.querySelectorAll('#destinasi article');
+
+      destinationCards.forEach(card => {
+        // Event Listener saat mouse masuk
+        card.addEventListener('mouseover', () => {
+          // Mengubah background color menjadi indigo muda (Tailwind: bg-indigo-50)
+          card.style.backgroundColor = '#eef2ff'; 
+          // Mengubah warna teks judul agar lebih kontras (Tailwind: text-indigo-700)
+          const title = card.querySelector('h3');
+          if(title) title.style.color = '#4338ca'; 
+        });
+
+        // Event Listener saat mouse keluar
+        card.addEventListener('mouseout', () => {
+          // Mengembalikan background ke putih
+          card.style.backgroundColor = '#ffffff';
+          // Mengembalikan warna teks judul
+          const title = card.querySelector('h3');
+          if(title) title.style.color = '#1f2937'; // text-gray-800
+        });
+      });
+
+
+      // --- IMPLEMENTASI 2: Pesan "Selamat Datang" Dinamis ---
+      
+      // 1. SIMULASI LOGIN: 
+      // Baris ini mensimulasikan bahwa user "Meitha Amanda" sudah login.
+      // Jika Anda menghubungkan ini dengan form login asli, hapus baris if ini.
+      if (!localStorage.getItem('username')) {
+        localStorage.setItem('username', 'Meitha Amanda');
+      }
+
+      // 2. Ambil data user dari localStorage
+      const currentUser = localStorage.getItem('username');
+      const authContainer = document.getElementById('auth-buttons');
+
+      // 3. Jika user ditemukan, ganti tombol Login dengan Pesan Selamat Datang
+      if (currentUser && authContainer) {
+        // Bersihkan konten lama (Tombol Login & Daftar)
+        authContainer.innerHTML = '';
+
+        // Buat elemen pesan selamat datang
+        const welcomeMessage = document.createElement('span');
+        welcomeMessage.className = 'font-semibold text-indigo-700 border-l-2 border-indigo-200 pl-4';
+        // Menggunakan textContent untuk keamanan (XSS protection)
+        welcomeMessage.textContent = `Selamat Datang, ${currentUser}!`;
+
+        // Buat tombol Logout sederhana
+        const logoutBtn = document.createElement('button');
+        logoutBtn.textContent = '(Logout)';
+        logoutBtn.className = 'text-xs text-red-500 hover:text-red-700 ml-2 font-medium';
+        logoutBtn.onclick = () => {
+          localStorage.removeItem('username'); // Hapus sesi
+          window.location.reload(); // Reload halaman
+        };
+
+        // Masukkan elemen ke dalam container
+        authContainer.appendChild(welcomeMessage);
+        authContainer.appendChild(logoutBtn);
+      }
+
+    });
+  </script>
+
+</body>
 </html>

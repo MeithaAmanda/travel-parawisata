@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin</title>
+  <link rel="stylesheet" href="/assets/css/admin.css">
+</head>
+
+<body>
+
+  <!-- side bar -->
+  <aside class="sidebar" id="sidebar">
+
+    <h2>Admin Panel</h2>
+
+    <div class="nav-section">
+      <p class="nav-title">MENU UTAMA</p>
+
+      <div class="nav-list">
+        <a href="#" class="active">Dashboard</a>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <p class="nav-title">USER</p>
+
+      <div class="dropdown">
+        <div class="dropdown-btn">
+          Kelola User
+          <span>▼</span>
+        </div>
+        <div class="dropdown-items">
+          <a href="#">Data User</a>
+          <a href="#">Tambah User</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <p class="nav-title">WISATA</p>
+
+      <div class="dropdown">
+        <div class="dropdown-btn">
+          Kelola Paket Wisata
+          <span>▼</span>
+        </div>
+        <div class="dropdown-items">
+          <a href="#">Semua Paket</a>
+          <a href="#">Tambah Paket</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <p class="nav-title">LAINNYA</p>
+      <div class="nav-list">
+        <a href="#">Transaksi</a>
+        <a href="#">Pengaturan</a>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- main -->
+  <main class="main" id="main">
+
+    <div class="top-bar">
+      <button class="toggle-btn" id="toggleBtn">☰</button>
+      <h1 class="h1">Dashboard Admin</h1>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <p class="card-title">Total User</p>
+        <p class="card-number stat-number-users">0</p>
+      </div>
+
+      <div class="card">
+        <p class="card-title">Paket Wisata</p>
+        <p class="card-number stat-number-paket">0</p>
+      </div>
+
+      <div class="card">
+        <p class="card-title">Transaksi</p>
+        <p class="card-number stat-number-transaksi">0</p>
+      </div>
+
+      <div class="card">
+        <p class="card-title">Mitra Terdaftar</p>
+        <p class="card-number stat-number-mitra">0</p>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="/assets/js/admin.js"></script>
+</body>
+</html>

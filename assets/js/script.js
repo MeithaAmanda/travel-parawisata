@@ -1,11 +1,3 @@
-// main.js — static frontend behaviour (no React, no API)
-// Place at: /assets/js/main.js
-// Responsibilities:
-//  - Mobile menu toggle
-//  - Smooth internal anchor scrolling
-//  - Reveal animations (fade-up)
-//  - Lightweight client-side form validation & simulated submit for pages (no API calls)
-
 (function () {
   'use strict';
 
