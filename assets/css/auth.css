@@ -1,11 +1,9 @@
-/* =========================================
-   1. RESET & GLOBAL
-   ========================================= */
+/* RESET & GLOBAL */
 * { 
     margin: 0; 
     padding: 0; 
     box-sizing: border-box; 
-    font-family: 'Poppins', sans-serif; /* Pastikan font Poppins dimuat di HTML */
+    font-family: 'Poppins', sans-serif; 
 }
 
 body {
@@ -16,9 +14,7 @@ body {
     min-height: 100vh;
 }
 
-/* =========================================
-   2. CARD & LAYOUT
-   ========================================= */
+/* CARD & LAYOUT */
 .auth-wrapper { 
     width: 100%; 
     max-width: 400px; 
@@ -49,9 +45,7 @@ body {
     font-size: 0.9rem; 
 }
 
-/* =========================================
-   3. FORM ELEMENTS
-   ========================================= */
+/* FORM ELEMENTS */
 .form-group { 
     margin-bottom: 1.2rem; 
 }
@@ -80,9 +74,7 @@ input:focus, select:focus {
     box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1); 
 }
 
-/* =========================================
-   4. BUTTONS & LINKS
-   ========================================= */
+/* BUTTONS & LINKS */
 .btn-primary {
     width: 100%; 
     padding: 0.75rem; 
@@ -117,14 +109,12 @@ input:focus, select:focus {
     text-decoration: underline;
 }
 
-/* =========================================
-   5. ERROR STATES & UTILITIES
-   ========================================= */
+/* ERROR STATES & UTILITIES*/
 .error-msg { 
     color: #ef4444; 
     font-size: 0.75rem; 
     margin-top: 0.25rem; 
-    display: none; /* Default sembunyi */
+    display: none; 
 }
 
 /* Class untuk menampilkan error (dipakai JS) */

@@ -1,14 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
     
+    // ==========================================
     // 1. LOGIKA SAPAAN & USER
+    // ==========================================
     function displayGreeting() {
+        // Target elemen tempat nama akan muncul
         const userNameElement = document.querySelector('.text-right .text-sm.font-bold');
         
         // Ambil nama dari LocalStorage
         const storedName = localStorage.getItem('username');
         const displayName = storedName ? storedName : "Mitra TripNesia";
 
-        // Tentukan Waktu
+        // Tentukan Waktu (Pagi/Siang/Sore)
         const jam = new Date().getHours();
         let sapaan = "Halo";
         if (jam >= 4 && jam < 10) sapaan = "Selamat Pagi";
@@ -16,16 +19,19 @@ document.addEventListener("DOMContentLoaded", () => {
         else if (jam >= 15 && jam < 18) sapaan = "Selamat Sore";
         else sapaan = "Selamat Malam";
 
-        // Update Teks
+        // Update Teks di HTML
         if (userNameElement) {
             userNameElement.innerHTML = `${sapaan}, <span class="text-indigo-600 capitalize">${displayName}</span>`;
         }
     }
     
-    displayGreeting(); // Panggil fungsi
+    // Panggil fungsi sapaan saat halaman dimuat
+    displayGreeting();
 
-    
+
+    // ==========================================
     // 2. UI DASHBOARD (SIDEBAR & TABS)
+    // ==========================================
 
     // --- Toggle Sidebar ---
     const sidebar = document.getElementById("premiumSidebar");
@@ -34,23 +40,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if(toggleBtn) {
         toggleBtn.addEventListener("click", () => {
+            // Toggle class untuk CSS
             sidebar.classList.toggle("collapsed");
-             if(window.innerWidth > 768) {
-                mainContent.style.marginLeft = sidebar.classList.contains("collapsed") ? "78px" : "260px";
-             }
+            
+            // Logika tambahan untuk Desktop (ubah margin)
+            if(window.innerWidth > 768) {
+                if (sidebar.classList.contains("collapsed")) {
+                    // Jika sidebar mengecil
+                    mainContent.classList.add("expanded"); // Tambahkan class margin kecil
+                    // Atau pakai inline style: mainContent.style.marginLeft = "78px";
+                } else {
+                    // Jika sidebar membesar
+                    mainContent.classList.remove("expanded"); // Hapus class margin kecil
+                    // Atau pakai inline style: mainContent.style.marginLeft = "260px";
+                }
+            }
+            // Di Mobile, CSS sudah menangani (overlay/slide), jadi JS cukup toggle class
         });
     }
 
-    // --- Tab Switching Logic ---
+    // --- Tab Switching Logic (SPA Sederhana) ---
     window.switchTab = function(viewId, element) {
+        // Sembunyikan semua konten section
         document.querySelectorAll('.section-content').forEach(el => el.classList.remove('active'));
         
+        // Tampilkan konten yang dipilih
         const targetView = document.getElementById('view-' + viewId);
         if(targetView) targetView.classList.add('active');
 
+        // Update status aktif di Sidebar Menu
         document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
         if(element) element.classList.add('active');
 
+        // Update Judul Halaman di Header
         const titles = {
             'dashboard': 'Ringkasan Bisnis',
             'paket': 'Manajemen Paket Wisata',
@@ -60,11 +82,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const pageTitle = document.getElementById('pageTitle');
         if(pageTitle) pageTitle.innerText = titles[viewId];
 
+        // Khusus Tab Paket: Render ulang data agar selalu fresh
         if(viewId === 'paket') renderPackages();
     };
 
 
-    // 3. MANAJEMEN PAKET WISATA (DATA & CRUD)
+    // ==========================================
+    // 3. MANAJEMEN PAKET WISATA (CRUD & LOGIC)
+    // ==========================================
+
+    // Data Dummy Awal
     let packages = [
         { id: 1, name: "Open Trip Bromo Sunrise", price: 350000, duration: "12 Jam", location: "Malang", status: "active", sold: 124, image: "https://images.unsplash.com/photo-1501785888041-af3ef285b470" },
         { id: 2, name: "Private Trip Raja Ampat", price: 5200000, duration: "4H 3M", location: "Papua", status: "active", sold: 12, image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e" },
@@ -75,26 +102,32 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentFilter = 'all';
     let editingId = null;
 
+    // Helper Format Rupiah
     const rupiah = (n) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(n);
 
+    // --- FUNGSI RENDER (TAMPILKAN DATA) ---
     window.renderPackages = function() {
         const grid = document.getElementById('packageGrid');
         const searchInput = document.getElementById('searchPackage');
         
+        // Cek apakah elemen grid ada (karena mungkin sedang di tab lain)
         if(!grid) return;
 
         const searchValue = searchInput ? searchInput.value.toLowerCase() : '';
-        grid.innerHTML = '';
+        grid.innerHTML = ''; // Bersihkan isi lama
 
+        // Filter Data berdasarkan Status & Search
         const filtered = packages.filter(p => {
             const statusMatch = currentFilter === 'all' || p.status === currentFilter;
             const searchMatch = p.name.toLowerCase().includes(searchValue);
             return statusMatch && searchMatch;
         });
 
+        // Update Counter (Menampilkan X paket)
         const countEl = document.getElementById('pkgCount');
         if(countEl) countEl.innerText = filtered.length;
 
+        // Jika Kosong
         if (filtered.length === 0) {
             grid.innerHTML = `<div class="col-span-full text-center py-12 text-gray-400 flex flex-col items-center">
                 <i class="bi bi-inbox text-4xl mb-2"></i>
@@ -103,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        // Loop Data & Buat HTML Kartu
         filtered.forEach(pkg => {
             let badge = '';
             if (pkg.status === 'active') badge = `<span class="badge badge-active absolute top-3 right-3 shadow-sm">Tayang</span>`;
@@ -142,20 +176,27 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
+    // --- FILTER STATUS ---
     window.filterPackages = function(status) {
         currentFilter = status;
+        // Update Tampilan Tombol Filter
         document.querySelectorAll('.filter-tab').forEach(btn => btn.classList.remove('active', 'bg-white', 'text-indigo-600', 'shadow-sm'));
         const activeTab = document.getElementById('tab-' + status);
         if(activeTab) activeTab.classList.add('active', 'bg-white', 'text-indigo-600', 'shadow-sm');
         renderPackages();
     };
 
+    // --- SEARCH ---
     const searchInput = document.getElementById('searchPackage');
     if(searchInput) {
         searchInput.addEventListener('input', renderPackages);
     }
 
-    // --- MODAL LOGIC ---
+
+    // ==========================================
+    // 4. MODAL FORM (TAMBAH & EDIT)
+    // ==========================================
+    
     const modal = document.getElementById('packageModal');
     const form = document.getElementById('packageForm');
 
@@ -170,6 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if(modal) modal.classList.add('hidden');
     };
 
+    // --- FUNGSI SIMPAN DATA ---
     window.savePackage = function() {
         const name = document.getElementById('inpName').value;
         const price = document.getElementById('inpPrice').value;
@@ -184,12 +226,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (editingId) {
+            // Mode Edit: Update Data yang Ada
             const idx = packages.findIndex(p => p.id === editingId);
             if (idx !== -1) {
                 packages[idx] = { ...packages[idx], name, price, duration, location, status, image };
                 alert("Paket berhasil diperbarui!");
             }
         } else {
+            // Mode Tambah: Buat Data Baru
             const newId = packages.length ? Math.max(...packages.map(p => p.id)) + 1 : 1;
             packages.unshift({ id: newId, name, price: parseInt(price), duration, location, status, image, sold: 0 });
             alert("Paket baru berhasil ditambahkan!");
@@ -199,21 +243,26 @@ document.addEventListener("DOMContentLoaded", () => {
         renderPackages();
     };
 
+    // --- FUNGSI EDIT ---
     window.editPackage = function(id) {
         const p = packages.find(x => x.id === id);
         if (p) {
             editingId = id;
             document.getElementById('modalTitle').innerText = 'Edit Paket Wisata';
+            
+            // Isi form dengan data lama
             document.getElementById('inpName').value = p.name;
             document.getElementById('inpPrice').value = p.price;
             document.getElementById('inpDuration').value = p.duration;
             document.getElementById('inpLocation').value = p.location;
             document.getElementById('inpStatus').value = p.status;
             document.getElementById('inpImage').value = p.image;
+            
             if(modal) modal.classList.remove('hidden');
         }
     };
 
+    // --- FUNGSI HAPUS ---
     window.deletePackage = function(id) {
         if(confirm("Apakah Anda yakin ingin menghapus paket ini?")) {
             packages = packages.filter(p => p.id !== id);
@@ -221,13 +270,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Logout Button
+    // --- LOGOUT ---
     const logoutBtn = document.querySelector('.sidebar-footer');
     if(logoutBtn) {
         logoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('username'); 
-            // Sesuaikan path ini jika file login ada di folder lain
-            window.location.href = '../login.html'; 
+            localStorage.removeItem('username'); // Bersihkan sesi
+            window.location.href = '../login.html'; // Sesuaikan path ke login
         });
     }
+
+    // Initial Render (Opsional: jalankan jika ingin langsung load data saat masuk)
+    // renderPackages(); 
 });
