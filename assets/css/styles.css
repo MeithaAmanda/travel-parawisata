@@ -1,296 +1,139 @@
-/* /assets/css/styles.css
-   Global styles for TripNesia landing page.
-   Works together with Tailwind CDN (load Tailwind first, then this file).
-   Implements:
-   - advanced selectors (:nth-child, [attr], :not(), combinators)
-   - pseudo-classes (:hover, :active, :focus)
-   - responsive layout with at least 3 breakpoints (mobile/tablet/desktop)
-   - accessibility focus styles, animations, and utilities
-*/
-
-/* =========================
-   Variables & Base
-   ========================= */
-:root{
-  --bg: #f8fafc;
-  --surface: #ffffff;
-  --muted: #6b7280;
-  --text: #0f172a;
-  --accent: #4f46e5;        /* indigo-600 */
-  --accent-600: #4338ca;
-  --success: #10b981;
-  --danger: #ef4444;
-  --glass: rgba(255,255,255,0.6);
-  --radius: 12px;
-  --container: 1100px;
-  --shadow-soft: 0 8px 28px rgba(2,6,23,0.06);
-  --transition-fast: 180ms cubic-bezier(.2,.9,.3,1);
-  --font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+:root { 
+    --accent: #4f46e5; 
+    --accent-dark: #4338ca;
 }
 
-/* Reset basics (light) */
-* { box-sizing: border-box; }
-html,body { height:100%; }
-body{
-  margin:0;
-  font-family: var(--font-family);
-  background: var(--bg);
-  color: var(--text);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  line-height:1.5;
+body { 
+    font-family: 'Poppins', sans-serif; 
 }
 
-/* Make images lazy by default if Tailwind pages didn't add it */
-img[loading="lazy"] { opacity: .99; }
-
-/* Utility container used in HTML */
-.container{
-  width:100%;
-  max-width:var(--container);
-  margin:0 auto;
-  padding:0 1rem;
+/*  ANIMATION */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-/* =========================
-   Header & Navigation
-   ========================= */
-.site-nav{
-  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.95));
-  border-bottom: 1px solid rgba(15,23,42,0.04);
-  backdrop-filter: blur(6px);
-}
-.nav-inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-  padding: .75rem 0;
+.animate-fade-up {
+    animation: fadeUp 550ms cubic-bezier(.16,.84,.44,1) both;
 }
 
-/* brand */
-.brand{ display:flex; align-items:center; gap:.6rem; text-decoration:none; color:var(--accent); font-weight:700 }
-.brand img{ display:block; width:42px; height:42px; border-radius:8px; object-fit:cover }
-
-/* nav list - fallback if Tailwind nav hidden on small screens */
-.nav-list{ list-style:none; margin:0; padding:0; display:flex; gap:1.25rem; align-items:center }
-.nav-list a{ color:#374151; text-decoration:none; font-weight:600; padding:.25rem .35rem; border-radius:6px }
-.nav-list a:hover,
-.nav-list a:focus{ color:var(--accent); outline:none; text-decoration:underline; transform: translateY(-1px) }
-
-/* nav actions (buttons) */
-.nav-actions{ display:flex; gap:.6rem; align-items:center }
-
-/* Use attribute selector to highlight active anchors (href starts with #paket) */
-.nav-list a[href^="#paket"] { box-shadow: inset 0 -2px 0 var(--accent); }
-
-/* Mobile menu icon: increase hit area without changing markup visually */
-#mobile-menu-button{ background:transparent; border:0; padding:.35rem; border-radius:8px }
-#mobile-menu-button:focus{ outline: 3px solid rgba(79,70,229,0.12) }
-
-/* =========================
-   Hero
-   ========================= */
-.hero-section{
-  padding: 4.25rem 0;
-  background-image: linear-gradient(180deg, rgba(15,23,42,0.03), rgba(15,23,42,0.00));
-}
-.hero-inner{
-  display:flex;
-  gap:1.25rem;
-  align-items:flex-start;
-  justify-content:space-between;
-  padding:2rem 0;
+/* Attribute Selector */
+input[type="search"] {
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-/* Headline */
-#hero-heading{
-  font-size: clamp(1.6rem, 4vw, 3.0rem);
-  line-height: 1.03;
-  margin:0 0 .6rem 0;
-  letter-spacing: -0.01em;
+input[type="search"]:focus {
+    border-color: var(--accent);
+    background-color: #fff;
+    transform: scale(1.01);
 }
 
-/* Lead paragraph */
-.lead{ color:var(--muted); margin:0 0 1.25rem 0; max-width:54ch }
-
-/* CTA group */
-.hero-cta{ display:flex; gap:.75rem; align-items:center }
-.hero-cta .btn{ border-radius:999px; padding:.65rem 1rem; font-weight:700 }
-
-/* Use attribute selector & pseudo-class to style anchor CTAs that link to internal anchors */
-.hero-cta a[href^="#"]:hover { transform: translateY(-3px); }
-
-/* subtle pattern: first CTA primary, second ghost */
-.hero-cta .btn-primary { background:var(--accent); color:#fff; box-shadow: 0 8px 28px rgba(67,56,202,0.12); }
-.hero-cta .btn-ghost { background: transparent; color:var(--accent); border:1px solid rgba(67,56,202,0.08) }
-
-/* =========================
-   Cards (Destinasi / Paket)
-   ========================= */
-.grid-cards { display:grid; gap:1rem; grid-template-columns: repeat(1, 1fr); }
-
-/* Card base */
-.card { background:var(--surface); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-soft); transition: transform var(--transition-fast), box-shadow var(--transition-fast); }
-.card:hover { transform: translateY(-6px); box-shadow: 0 18px 48px rgba(2,6,23,.10); }
-
-/* Card media */
-.card-media { width:100%; height:180px; object-fit:cover; display:block; }
-
-/* Card body */
-.card-body { padding:1rem; }
-
-/* nth-child selector for visual variety */
-.grid-cards article:nth-child(odd) .card-media { filter: saturate(1.05) contrast(1.03); }
-.grid-cards article:nth-child(even) .card-media { filter: sepia(.02) brightness(.98); }
-
-/* Attribute selector example: highlight cards that have data-featured attribute */
-.grid-cards article[data-featured="true"] { border: 2px solid rgba(79,70,229,0.12); position:relative; }
-.grid-cards article[data-featured="true"]::after {
-  content: "Recommended";
-  position:absolute;
-  top:12px; right:12px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-600));
-  color:#fff; padding:.35rem .6rem; border-radius:8px; font-size:.75rem; font-weight:700;
-  box-shadow: 0 6px 18px rgba(67,56,202,0.12);
+/* Pseudo-class */
+.btn-primary:hover {
+    background-color: var(--accent-dark);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
-/* Card footer actions: align and small transitions */
-.card .btn{ transition: transform .12s ease, box-shadow .12s ease }
-.card .btn:hover{ transform: translateY(-3px); }
-
-/* =========================
-   Testimonials
-   ========================= */
-.grid-testimonials { display:grid; gap:1rem; grid-template-columns: 1fr; }
-.testimonial p{ margin:0 0 .5rem 0; font-style:italic; color:#111827; }
-.testimonial footer { color:var(--muted); font-weight:600; }
-
-/* Use :nth-child to vary background color subtly */
-.grid-testimonials article:nth-child(3n+1){ background: linear-gradient(180deg,#fff,#fafafc); }
-.grid-testimonials article:nth-child(3n+2){ background: linear-gradient(180deg,#fff,#fff); }
-.grid-testimonials article:nth-child(3n){ background: linear-gradient(180deg,#fff,#fbfbfd); }
-
-/* =========================
-   Footer
-   ========================= */
-footer { background: #0f172a; color: #fff; padding:2.25rem 0; margin-top:2rem; }
-.footer-inner { display:flex; gap:1rem; align-items:center; justify-content:space-between; flex-wrap:wrap; }
-.footer-nav a{ color: rgba(255,255,255,0.85); text-decoration:none; }
-.footer-nav a:hover{ text-decoration:underline }
-
-/* =========================
-   Forms & Accessibility
-   ========================= */
-/* Target required inputs using attribute selector and pseudo-class for invalid */
-input[required]:invalid, textarea[required]:invalid {
-  border-color: rgba(239,68,68,0.9);
-  box-shadow: 0 0 0 4px rgba(239,68,68,0.06);
+.btn-primary:active {
+    transform: scale(0.95); /* Efek tombol ditekan */
 }
 
-/* Focus ring with high contrast */
-:focus { outline: none; box-shadow: 0 0 0 4px rgba(79,70,229,0.12); border-radius:8px; }
-
-/* Buttons active state */
-button:active, a.btn:active {
-  transform: translateY(0);
-  opacity: .93;
+/* Complex Selector :nth-child */
+.responsive-grid article:nth-child(even) {
+    background-color: #fafafa; 
 }
 
-/* Example of complex selector: style nav links inside header except the brand link */
-header.site-nav .nav-list > li:not(:first-child) > a { letter-spacing: .01em; }
+/*  MEDIA QUERIES & RESPONSIVE DESIGN */
 
-/* =========================
-   Utilities & helpers
-   ========================= */
-.text-muted { color: var(--muted); }
-.center { text-align:center; }
-.hidden { display:none !important; }
-
-/* Buttons that appear in markup using "data-*" attributes */
-a[data-role="download"]{ background: linear-gradient(90deg,var(--accent),var(--accent-600)); color:#fff; padding:.55rem .9rem; border-radius:999px; text-decoration:none; }
-
-/* =========================
-   Reveal Animation Hook
-   ========================= */
-.fade-up { transform: translateY(8px); opacity:0; transition: transform .45s cubic-bezier(.16,.84,.44,1), opacity .45s; }
-.fade-up.show { transform: translateY(0); opacity:1; }
-
-/* =========================
-   Responsive Media Queries
-   Breakpoints:
-    - Mobile: up to 639px
-    - Tablet: 640px - 1023px
-    - Desktop: 1024px and above
-   ========================= */
-
-/* MOBILE (default base is mobile-first). Adjustments for very small screens */
-@media (max-width: 639px) {
-  .nav-list { display:none; }
-  .nav-actions { display:none; }
-  .hero-inner { align-items:center; text-align:center; padding:1.5rem 0; }
-  .hero-cta { flex-direction:column; width:100%; gap:.6rem; }
-  .hero-cta .btn { width:100%; justify-content:center; }
-  .grid-cards { grid-template-columns: repeat(1, 1fr); }
-  .card-media { height:160px; }
-  .footer-inner { flex-direction:column; gap:.5rem; align-items:center; text-align:center; }
+/* --- MOBILE (Default / < 768px) --- */
+.logo-responsive {
+    width: 32px;
+    height: 32px;
 }
 
-/* TABLET */
-@media (min-width: 640px) and (max-width: 1023px) {
-  .nav-list { display:flex; gap:1rem; }
-  .nav-actions { display:flex; }
-  .hero-inner { align-items:flex-start; }
-  .grid-cards { grid-template-columns: repeat(2, minmax(0,1fr)); }
-  .grid-testimonials { grid-template-columns: repeat(2, 1fr); }
-  .card-media { height:180px; }
+.hero-title {
+    font-size: 2.25rem; /* 36px */
+    line-height: 2.5rem;
 }
 
-/* DESKTOP */
+.section-padding {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+/* Grid Default (Mobile: 1 Kolom) */
+.responsive-grid, 
+.responsive-grid-paket,
+.responsive-grid-testimoni {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+/* --- TABLET (Min Width 768px) --- */
+@media (min-width: 768px) {
+    .logo-responsive {
+        width: 40px;
+        height: 40px;
+    }
+
+    .hero-title {
+        font-size: 3.75rem; /* 60px */
+        line-height: 1;
+    }
+
+    .section-padding {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    /* Grid Tablet: 2 Kolom */
+    .responsive-grid,
+    .responsive-grid-paket {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Testimoni jadi 3 kolom di tablet */
+    .responsive-grid-testimoni {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* --- DESKTOP (Min Width 1024px) --- */
 @media (min-width: 1024px) {
-  .nav-list { display:flex; gap:1.25rem; }
-  .nav-actions { display:flex; }
-  .hero-inner { align-items:center; padding:3rem 0; }
-  .grid-cards { grid-template-columns: repeat(3, minmax(0,1fr)); }
-  .grid-testimonials { grid-template-columns: repeat(3, 1fr); }
-  .card-media { height:220px; }
+    .logo-responsive {
+        width: 48px;
+        height: 48px;
+    }
+
+    .hero-title {
+        font-size: 4.5rem; /* 72px */
+    }
+    
+    .section-padding {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+
+    /* Kolom untuk destinasi */
+    .responsive-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    /* Kolom untuk paket */
+    .responsive-grid-paket {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Complex Selector Lanjutan untuk Desktop */
+    .responsive-grid > article:nth-child(even) {
+        transform: translateY(15px);
+        transition: transform 0.3s ease;
+    }
+    
+    .responsive-grid > article:nth-child(even):hover {
+        transform: translateY(10px) scale(1.02);
+    }
 }
-
-/* LARGE DESKTOP — progressive enhancement */
-@media (min-width: 1400px) {
-  .grid-cards { grid-template-columns: repeat(4, minmax(0,1fr)); }
-  .hero-inner { max-width: 1150px; margin: 0 auto; }
-}
-
-/* =========================
-   Advanced selector examples (decorative & educational)
-   ========================= */
-
-/* Select any anchor that links to an in-page anchor and add subtle underline on hover */
-a[href^="#"]:not(.no-underline) { position:relative; text-decoration:none; }
-a[href^="#"]:not(.no-underline)::after {
-  content: '';
-  position:absolute;
-  left:0; bottom:-4px;
-  width:0%; height:2px;
-  background: linear-gradient(90deg,var(--accent),var(--accent-600));
-  transition: width .18s ease;
-}
-a[href^="#"]:not(.no-underline):hover::after { width:100%; }
-
-/* Style only direct children buttons inside .card that are first-child / last-child */
-.card > .card-body > .btn:first-child { margin-right:.5rem; }
-.card > .card-body > .btn:last-child { margin-left:.5rem; }
-
-/* Use attribute substring match: highlight price labels that contain "Rp" */
-.card-body [data-price*="Rp"] { font-weight:800; color:var(--accent); }
-
-/* Use complex combinator: style headings inside a card when preceded by an image sibling */
-.card-media + .card-body h3 { margin-top:0; font-size:1.1rem; }
-
-/* Accessibility: focus visible only (useful with keyboard) */
-:focus:not(:focus-visible) { box-shadow:none; outline:none; }
-
-/* =========================
-   End of file
-   ========================= */

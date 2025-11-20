@@ -2,145 +2,203 @@
 <html lang="id">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Mitra — TripNesia</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Mitra — TripNesia</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-    }
-  </style>
+    <link rel="stylesheet" href="/assets/css/style-dashboard-mitra.css">
 </head>
 
-<body class="bg-gray-100">
+<body>
 
-  <!-- LAYOUT WRAPPER -->
-  <div class="flex h-screen">
+    <aside id="premiumSidebar" class="sidebar-premium">
+        <div class="sidebar-header">
+            <div class="flex items-center gap-2">
+                <img src="assets/images/logo-tripnesia.png" alt="Logo TripNesia" class="w-8 h-8 object-contain">
+                <span class="logo-text">TripNesia</span>
+            </div>
+            <i id="toggleSidebar" class="bi bi-list toggle-btn"></i>
+        </div>
 
-    <!-- SIDEBAR -->
-    <aside class="w-64 bg-white border-r hidden md:block">
-      <div class="p-6 border-b">
-        <h1 class="text-2xl font-bold text-indigo-600">TripNesia</h1>
-        <p class="text-sm text-gray-500">Dashboard Mitra</p>
-      </div>
+        <ul class="sidebar-menu">
+            <li class="menu-item active" onclick="switchTab('dashboard', this)">
+                <i class="bi bi-grid-fill"></i> <span>Dashboard</span>
+            </li>
+            <li class="menu-item" onclick="switchTab('paket', this)">
+                <i class="bi bi-map"></i> <span>Paket Wisata</span>
+            </li>
+            <li class="menu-item" onclick="switchTab('pesanan', this)">
+                <i class="bi bi-cart-check"></i> <span>Pesanan</span>
+            </li>
+            <li class="menu-item" onclick="switchTab('keuangan', this)">
+                <i class="bi bi-cash-stack"></i> <span>Pendapatan</span>
+            </li>
+        </ul>
 
-      <nav class="p-4 space-y-2">
-        <a href="#" class="block px-4 py-2 rounded-md bg-indigo-600 text-white font-medium">Dashboard</a>
-        <a href="#" class="block px-4 py-2 rounded-md hover:bg-gray-100">Paket Wisata</a>
-        <a href="#" class="block px-4 py-2 rounded-md hover:bg-gray-100">Pesanan</a>
-        <a href="#" class="block px-4 py-2 rounded-md hover:bg-gray-100">Pendapatan</a>
-        <a href="#" class="block px-4 py-2 rounded-md hover:bg-gray-100">Ulasan</a>
-        <a href="#" class="block px-4 py-2 rounded-md hover:bg-gray-100">Pengaturan</a>
-        <a href="/logout" class="block px-4 py-2 mt-4 rounded-md bg-red-500 text-white">Logout</a>
-      </nav>
+        <div class="sidebar-footer">
+            <i class="bi bi-box-arrow-left"></i>
+            <span>Logout</span>
+        </div>
     </aside>
 
-    <!-- CONTENT -->
-    <div class="flex-1 flex flex-col">
+    <div id="mainContent" class="p-6">
 
-      <!-- TOPBAR -->
-      <header class="bg-white shadow p-4 flex justify-between items-center">
-        <h2 class="text-xl font-semibold text-gray-700">Dashboard Mitra</h2>
-        <div class="flex items-center gap-3">
-          <span class="text-gray-600">Halo, Mitra!</span>
-          <img src="https://i.pravatar.cc/40" class="w-10 h-10 rounded-full border">
-        </div>
-      </header>
-
-      <!-- MAIN CONTENT -->
-      <main class="p-6 overflow-y-auto">
-
-        <!-- CARDS -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-
-          <div class="bg-white p-6 shadow rounded-xl">
-            <p class="text-gray-500">Pesanan Masuk</p>
-            <h3 class="text-3xl font-bold">27</h3>
-          </div>
-
-          <div class="bg-white p-6 shadow rounded-xl">
-            <p class="text-gray-500">Pendapatan Bulan Ini</p>
-            <h3 class="text-3xl font-bold">Rp 12.450.000</h3>
-          </div>
-
-          <div class="bg-white p-6 shadow rounded-xl">
-            <p class="text-gray-500">Paket Aktif</p>
-            <h3 class="text-3xl font-bold">8</h3>
-          </div>
-
-          <div class="bg-white p-6 shadow rounded-xl">
-            <p class="text-gray-500">Rating Mitra</p>
-            <h3 class="text-3xl font-bold">4.9 ★</h3>
-          </div>
-
+        <div class="flex justify-between items-center mb-8 bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+            <h2 class="text-xl font-semibold text-gray-800" id="pageTitle">Ringkasan Bisnis</h2>
+            <div class="flex items-center gap-3">
+                <div class="text-right hidden md:block">
+                    <p class="text-sm font-bold text-gray-800">Mitra Bromo Travel</p>
+                    <p class="text-xs text-green-600">● Terverifikasi</p>
+                </div>
+                <img src="https://ui-avatars.com/api/?name=Bromo+Travel&background=random" class="w-10 h-10 rounded-full border-2 border-white shadow-sm">
+            </div>
         </div>
 
-        <!-- TABEL PESANAN -->
-        <div class="bg-white p-6 shadow rounded-xl">
-          <h3 class="text-xl font-semibold mb-4">Pesanan Terbaru</h3>
+        <div id="view-dashboard" class="section-content active">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white p-6 shadow-sm border border-gray-100 rounded-xl">
+                    <p class="text-gray-500 text-sm">Pesanan Masuk</p>
+                    <h3 class="text-3xl font-bold text-indigo-600 mt-1">27</h3>
+                </div>
+                <div class="bg-white p-6 shadow-sm border border-gray-100 rounded-xl">
+                    <p class="text-gray-500 text-sm">Pendapatan Bulan Ini</p>
+                    <h3 class="text-3xl font-bold text-gray-800 mt-1">Rp 12.450.000</h3>
+                </div>
+                <div class="bg-white p-6 shadow-sm border border-gray-100 rounded-xl">
+                    <p class="text-gray-500 text-sm">Paket Aktif</p>
+                    <h3 class="text-3xl font-bold text-green-600 mt-1">8</h3>
+                </div>
+                <div class="bg-white p-6 shadow-sm border border-gray-100 rounded-xl">
+                    <p class="text-gray-500 text-sm">Rating Mitra</p>
+                    <h3 class="text-3xl font-bold text-yellow-500 mt-1">4.9 ★</h3>
+                </div>
+            </div>
 
-          <div class="overflow-x-auto">
-            <table class="w-full border-collapse">
-              <thead>
-                <tr class="bg-gray-100 text-left text-sm">
-                  <th class="p-3">Nama Pemesan</th>
-                  <th class="p-3">Paket</th>
-                  <th class="p-3">Tanggal</th>
-                  <th class="p-3">Status</th>
-                  <th class="p-3">Aksi</th>
-                </tr>
-              </thead>
-
-              <tbody class="text-sm">
-
-                <tr class="border-b">
-                  <td class="p-3">Rizky Ramadhan</td>
-                  <td class="p-3">Trip Bromo Sunrise</td>
-                  <td class="p-3">21 Nov 2025</td>
-                  <td class="p-3">
-                    <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs">Menunggu</span>
-                  </td>
-                  <td class="p-3">
-                    <button class="text-indigo-600 hover:underline">Detail</button>
-                  </td>
-                </tr>
-
-                <tr class="border-b">
-                  <td class="p-3">Sinta Lestari</td>
-                  <td class="p-3">Explore Nusa Penida</td>
-                  <td class="p-3">20 Nov 2025</td>
-                  <td class="p-3">
-                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">Selesai</span>
-                  </td>
-                  <td class="p-3">
-                    <button class="text-indigo-600 hover:underline">Detail</button>
-                  </td>
-                </tr>
-
-                <tr class="border-b">
-                  <td class="p-3">Dewi Anggraini</td>
-                  <td class="p-3">Paket Lombok 3D2N</td>
-                  <td class="p-3">19 Nov 2025</td>
-                  <td class="p-3">
-                    <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs">Dibatalkan</span>
-                  </td>
-                  <td class="p-3">
-                    <button class="text-indigo-600 hover:underline">Detail</button>
-                  </td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
+            <div class="bg-white p-6 shadow-sm border border-gray-100 rounded-xl">
+                <h3 class="text-lg font-bold mb-4 text-gray-800">Pesanan Terbaru</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gray-50 text-gray-600 font-medium border-b">
+                            <tr>
+                                <th class="p-3">Nama Pemesan</th>
+                                <th class="p-3">Paket Wisata</th>
+                                <th class="p-3">Tanggal</th>
+                                <th class="p-3">Status</th>
+                                <th class="p-3 text-right">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 font-medium">Rizky Ramadhan</td>
+                                <td class="p-3">Trip Bromo Sunrise</td>
+                                <td class="p-3">21 Nov 2025</td>
+                                <td class="p-3"><span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded text-xs font-semibold">Menunggu</span></td>
+                                <td class="p-3 text-right text-indigo-600 cursor-pointer hover:underline">Detail</td>
+                            </tr>
+                            <tr class="hover:bg-gray-50">
+                                <td class="p-3 font-medium">Sinta Lestari</td>
+                                <td class="p-3">Explore Nusa Penida</td>
+                                <td class="p-3">20 Nov 2025</td>
+                                <td class="p-3"><span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-semibold">Selesai</span></td>
+                                <td class="p-3 text-right text-indigo-600 cursor-pointer hover:underline">Detail</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-      </main>
+        <div id="view-paket" class="section-content">
+            
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                <div class="flex bg-gray-200 p-1 rounded-lg">
+                    <button onclick="filterPackages('all')" class="filter-tab active" id="tab-all">Semua</button>
+                    <button onclick="filterPackages('active')" class="filter-tab" id="tab-active">Tayang</button>
+                    <button onclick="filterPackages('draft')" class="filter-tab" id="tab-draft">Draft</button>
+                </div>
+                <div class="flex gap-3 w-full md:w-auto">
+                    <input type="text" id="searchPackage" placeholder="Cari paket..." class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:outline-none w-full md:w-64">
+                    <button onclick="openModal()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition whitespace-nowrap">
+                        + Tambah
+                    </button>
+                </div>
+            </div>
 
+            <div id="packageGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                </div>
+            
+            <div class="mt-8 text-center text-sm text-gray-500">
+                Menampilkan <span id="pkgCount" class="font-bold">0</span> paket wisata.
+            </div>
+        </div>
+
+        <div id="view-pesanan" class="section-content">
+            <div class="p-10 text-center text-gray-400">Halaman Manajemen Pesanan (Coming Soon)</div>
+        </div>
+        <div id="view-keuangan" class="section-content">
+            <div class="p-10 text-center text-gray-400">Halaman Laporan Keuangan (Coming Soon)</div>
+        </div>
+
+    </div> 
+
+    <div id="packageModal" class="fixed inset-0 z-[60] hidden overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+                <div class="absolute inset-0 bg-gray-900 opacity-60" onclick="closeModal()"></div>
+            </div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            
+            <div class="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+                <div class="bg-white px-6 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="flex justify-between items-center mb-5">
+                        <h3 class="text-xl font-bold text-gray-900" id="modalTitle">Form Paket Wisata</h3>
+                        <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+                    </div>
+                    <form id="packageForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Nama Paket</label>
+                            <input type="text" id="inpName" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500" placeholder="Contoh: Trip Bromo Midnight">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Harga (Rp)</label>
+                            <input type="number" id="inpPrice" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Durasi</label>
+                            <input type="text" id="inpDuration" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500" placeholder="1 Hari">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Lokasi</label>
+                            <input type="text" id="inpLocation" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                            <select id="inpStatus" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500 bg-white">
+                                <option value="active">Tayang</option>
+                                <option value="review">Review</option>
+                                <option value="draft">Draft</option>
+                            </select>
+                        </div>
+                        <div class="col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">URL Gambar</label>
+                            <input type="text" id="inpImage" class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500" placeholder="https://...">
+                        </div>
+                    </form>
+                </div>
+                <div class="bg-gray-50 px-6 py-3 sm:flex sm:flex-row-reverse gap-2">
+                    <button type="button" onclick="savePackage()" class="w-full inline-flex justify-center rounded-lg border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 sm:w-auto sm:text-sm">Simpan</button>
+                    <button type="button" onclick="closeModal()" class="mt-3 w-full inline-flex justify-center rounded-lg border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm">Batal</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
+    <script src="assets/js/script-dashboard-mitra.js"></script>
 </body>
 </html>

@@ -4,23 +4,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>TripNesia — Paket Wisata Terbaik</title>
+  <title>TripNesia - Temukan Keindahan Indonesia</title>
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <meta name="description" content="TripNesia - Paket wisata terbaik untuk menjelajahi keindahan Indonesia.">
   <link rel="icon" href="/assets/images/favicon.ico" />
-
-  <style>
-    :root { --accent: #4f46e5; }
-    body { font-family: 'Poppins', sans-serif; }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fade-up {
-      animation: fadeUp 550ms cubic-bezier(.16,.84,.44,1) both;
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 
 <body class="bg-gradient-to-b from-gray-50 to-white text-gray-800">
@@ -28,18 +18,18 @@
   <header class="sticky top-0 z-50 bg-white/60 backdrop-blur-sm">
     <div class="container mx-auto px-6 py-4 flex items-center justify-between">
       <a href="#" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-600 to-indigo-400 flex items-center justify-center text-white font-bold">T</div>
+        <img src="/assets/images/logo-tripnesia.png" alt="Logo TripNesia" class="w-15 h-11 object-contain rounded-lg">
         <span class="text-2xl font-semibold text-indigo-700">TripNesia</span>
       </a>
 
       <nav id="desktop-nav" class="hidden md:flex items-center gap-6">
         <a href="#destinasi" class="text-gray-600 hover:text-indigo-600 transition">Destinasi</a>
-        <a href="/paket wisata.html" class="text-gray-600 hover:text-indigo-600 transition">Paket Wisata</a>
+        <a href="/paket_wisata.html" class="text-gray-600 hover:text-indigo-600 transition">Paket Wisata</a>
         <a href="#testimoni" class="text-gray-600 hover:text-indigo-600 transition">Testimoni</a>
         
         <div id="auth-buttons" class="flex items-center gap-4">
             <a href="/login.html" class="text-indigo-700 hover:underline">Login</a>
-            <a href="/regist_akun.html" class="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 transition">Daftar</a>
+            <a href="/register.html" class="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 transition">Daftar</a>
         </div>
       </nav>
 
@@ -56,10 +46,10 @@
     <div class="peer-checked:block hidden md:hidden bg-white border-t border-gray-100">
       <div class="px-6 pt-4 pb-6 space-y-3" id="mobile-menu-items">
         <a href="#destinasi" class="block text-gray-700 hover:text-indigo-600">Destinasi</a>
-        <a href="/paket wisata.html" class="block text-gray-700 hover:text-indigo-600">Paket Wisata</a>
+        <a href="/paket_wisata.html" class="block text-gray-700 hover:text-indigo-600">Paket Wisata</a>
         <a href="#testimoni" class="block text-gray-700 hover:text-indigo-600">Testimoni</a>
         <a href="/login.html" class="block text-indigo-700">Login</a>
-        <a href="/regist_akun.html" class="block bg-indigo-600 text-white px-4 py-2 rounded-full text-center">Daftar</a>
+        <a href="/register.html" class="block bg-indigo-600 text-white px-4 py-2 rounded-full text-center">Daftar</a>
       </div>
     </div>
   </header>
@@ -195,74 +185,7 @@
     </div>
   </footer>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      
-      // --- IMPLEMENTASI 1: Efek Interaktif pada Kartu (Mouseover/Mouseout) ---
-      // Kita menargetkan elemen <article> yang ada di dalam section #destinasi
-      const destinationCards = document.querySelectorAll('#destinasi article');
-
-      destinationCards.forEach(card => {
-        // Event Listener saat mouse masuk
-        card.addEventListener('mouseover', () => {
-          // Mengubah background color menjadi indigo muda (Tailwind: bg-indigo-50)
-          card.style.backgroundColor = '#eef2ff'; 
-          // Mengubah warna teks judul agar lebih kontras (Tailwind: text-indigo-700)
-          const title = card.querySelector('h3');
-          if(title) title.style.color = '#4338ca'; 
-        });
-
-        // Event Listener saat mouse keluar
-        card.addEventListener('mouseout', () => {
-          // Mengembalikan background ke putih
-          card.style.backgroundColor = '#ffffff';
-          // Mengembalikan warna teks judul
-          const title = card.querySelector('h3');
-          if(title) title.style.color = '#1f2937'; // text-gray-800
-        });
-      });
-
-
-      // --- IMPLEMENTASI 2: Pesan "Selamat Datang" Dinamis ---
-      
-      // 1. SIMULASI LOGIN: 
-      // Baris ini mensimulasikan bahwa user "Meitha Amanda" sudah login.
-      // Jika Anda menghubungkan ini dengan form login asli, hapus baris if ini.
-      if (!localStorage.getItem('username')) {
-        localStorage.setItem('username', 'Meitha Amanda');
-      }
-
-      // 2. Ambil data user dari localStorage
-      const currentUser = localStorage.getItem('username');
-      const authContainer = document.getElementById('auth-buttons');
-
-      // 3. Jika user ditemukan, ganti tombol Login dengan Pesan Selamat Datang
-      if (currentUser && authContainer) {
-        // Bersihkan konten lama (Tombol Login & Daftar)
-        authContainer.innerHTML = '';
-
-        // Buat elemen pesan selamat datang
-        const welcomeMessage = document.createElement('span');
-        welcomeMessage.className = 'font-semibold text-indigo-700 border-l-2 border-indigo-200 pl-4';
-        // Menggunakan textContent untuk keamanan (XSS protection)
-        welcomeMessage.textContent = `Selamat Datang, ${currentUser}!`;
-
-        // Buat tombol Logout sederhana
-        const logoutBtn = document.createElement('button');
-        logoutBtn.textContent = '(Logout)';
-        logoutBtn.className = 'text-xs text-red-500 hover:text-red-700 ml-2 font-medium';
-        logoutBtn.onclick = () => {
-          localStorage.removeItem('username'); // Hapus sesi
-          window.location.reload(); // Reload halaman
-        };
-
-        // Masukkan elemen ke dalam container
-        authContainer.appendChild(welcomeMessage);
-        authContainer.appendChild(logoutBtn);
-      }
-
-    });
-  </script>
+  <script src="script.js"></script>
 
 </body>
 </html>

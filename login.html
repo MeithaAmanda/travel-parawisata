@@ -1,77 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script> 
-    <title>TripNesia</title>
+    <title>Login - TripNesia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
+        /* Style untuk error visual */
+        .input-error { border-color: #ef4444 !important; background-color: #fef2f2; }
+        .error-text { color: #ef4444; font-size: 0.75rem; margin-top: 0.25rem; display: none; }
+        .error-text.show { display: block; }
     </style>
 </head>
-<body class=" flex flex-col min-h-screen bg-gray-50">
-
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-indigo-600">TripNesia</a>
-            <div class="hidden md:flex space-x-8">
-                <a href="/index.html" class="text-gray-600 hover:text-indigo-600">Destinasi</a>
-                <a href="/paket wisata.html" class="text-gray-600 hover:text-indigo-600">Paket Wisata</a>
-                <a href="#testimoni" class="text-gray-600 hover:text-indigo-600">Testimoni</a>
-                <button class="text-indigo-700 hover:underline"><a href="/login.html">Login</a></button>
-                <button class="bg-indigo-600 text-white px-5 py-2 rounded-full hover:bg-indigo-700 transition"><a href="/regist_akun.html">Daftar</a></button>
-            </div>
-        </nav>
-    </header>
-<main class="flex-grow">
-    <section class="relative h-[60vh] md:h-[80vh] bg-cover bg-center" style="background-image: url('/assets/images/BG1.jpg');">
-        <div class="absolute inset-0 bg-black opacity-50"></div>
-        <div class="relative z-10 flex flex-col justify-center items-center h-full text-black-600 text-center px-4">
-            <h1 class="text-gray-50 text-4xl md:text-6xl font-bold mb-4">Temukan Petualangan Anda Berikutnya</h1>
-                <p class="text-gray-50 text-lg md:text-xl max-w-2xl">Silahkan Log in Untuk Menemukan Berbagai Promo Menarik Khusus Untuk Anda </p>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+        <div class="text-center mb-6">
+            <h2 class="text-2xl font-bold text-indigo-700">Login TripNesia</h2>
+            <p class="text-gray-500 text-sm">Pilih role untuk simulasi masuk</p>
+        </div>
         
-            <section class="bg-neutral-50/10 p-6 rounded-xl shadow-md w-full md:w-5/12 lg:w-1/4" id="login-section">
-                <form action="#" method="POST" class="space-y-4">
-                    <!-- Email -->
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-50">Email</label>
-                        <input id="email" type="email" class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Masukkan email Anda" required>
-                    </div>
-    
-                    <!-- Password -->
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-gray-50">Kata Sandi</label>
-                        <input id="password" type="password" class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400" placeholder="Masukkan kata sandi" required>
-                    </div>
-    
-                    <!-- Ingat & Lupa Password -->
-                    <div class="flex items-center justify-between">
-                        <label class="flex items-center text-sm text-gray-50">
-                            <input type="checkbox" class="mr-2 rounded border-gray-300 text-indigo-600 focus:ring-green-400"> Ingat saya
-                        </label>
-                        <a href="#" class="text-sm text-indigo-600 hover:underline">Lupa kata sandi?</a>
-                    </div>
-    
-                    <!-- Tombol Login -->
-                    <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded-lg font-semibold hover:bg-indigo-900 transform hover:scale-[1.02] transition duration-200 shadow-md">Masuk</button>
-                </form>
-    
-                <!-- Daftar -->
-                <p class="text-sm text-center text-gray-50 mt-6">
-                    Belum punya akun? 
-                    <a href="/regist_akun.html" class="text-indigo-600 hover:underline font-semibold">Daftar sekarang</a>
-                </p>
+        <form id="simpleAuthForm" novalidate>
+            
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-1">Email</label>
+                <input type="email" id="loginEmail" class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:border-indigo-500" placeholder="user@contoh.com">
+                <small class="error-text">Format email harus valid (ada @ dan .)</small>
             </div>
-        </div>
-    </section>
-</main>
-    
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy;TripNesia 2025. All Rights Reserved.</p>
-        </div>
-    </footer>
+
+            <div class="mb-4">
+                <label class="block text-sm font-medium mb-1">Password</label>
+                <input type="password" id="loginPassword" class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:border-indigo-500" placeholder="********">
+                <small class="error-text">Password minimal 8 karakter</small>
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-sm font-medium mb-1 text-indigo-700 font-bold">Masuk Sebagai</label>
+                <select id="loginRole" class="w-full border-2 border-indigo-100 p-2 rounded bg-indigo-50 focus:outline-none focus:border-indigo-500">
+                    <option value="">-- Pilih Role --</option>
+                    <option value="user">User / Wisatawan</option>
+                    <option value="mitra">Mitra Travel</option>
+                    <option value="admin">Admin TripNesia</option>
+                </select>
+                <small class="error-text">Silakan pilih peran Anda</small>
+            </div>
+
+            <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition font-bold">Masuk Sekarang</button>
+        </form>
+    </div>
+
+    <script src="/assets/js/auth.js"></script>
 </body>
 </html>

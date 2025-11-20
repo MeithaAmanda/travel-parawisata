@@ -1,205 +1,461 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>TripNesia Mitra — Bergabung Jadi Partner Wisata</title>
+  <title>TripNesia Mitra — Premium</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <meta name="description" content="TripNesia Mitra - Platform untuk menjadi mitra penyedia paket wisata, transportasi, dan akomodasi. Bergabung dan kembangkan bisnismu.">
-  <link rel="icon" href="/assets/images/favicon.ico" />
-
+  <meta name="description" content="TripNesia Mitra — Platform premium untuk mitra paket wisata. Bergabung dan kembangkan usaha wisata Anda.">
+  <meta name="color-scheme" content="light dark">
   <style>
-    :root { --accent: #4f46e5; }
+    :root{
+      --accent-1: #4f46e5;   /* indigo */
+      --accent-2: #06b6d4;   /* cyan */
+      --muted: #6b7280;
+      --glass: rgba(255,255,255,0.12);
+    }
+    [data-theme="dark"]{
+      --bg: #0b1020;
+      --card: #0f1724;
+      --text: #e6eef8;
+      --muted: #9aa6bd;
+      --glass: rgba(255,255,255,0.04);
+    }
+    [data-theme="light"]{
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f1724;
+      --muted: #6b7280;
+      --glass: rgba(0,0,0,0.04);
+    }
 
-    body {
+    html,body { height:100%; }
+    body{
       font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #f5f7ff 0%, #ffffff 40%);
+      color:var(--text,#0f1724);
+      transition: background .35s ease,color .35s ease;
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to   { opacity: 1; transform: translateY(0); }
+    /* HERO PARALLAX (CSS fallback) */
+    .hero {
+      background-image: linear-gradient(180deg, rgba(5,6,21,0.45), rgba(5,6,21,0.18)), url('/assets/images/mitra-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
     }
-    .animate-fade-up {
-      animation: fadeUp 550ms cubic-bezier(.16,.84,.44,1) both;
-    }
+
+    /* Animations */
+    @keyframes fadeUp { from { opacity:0; transform: translateY(20px);} to {opacity:1; transform:none;} }
+    @keyframes fadeLeft { from { opacity:0; transform: translateX(-20px);} to {opacity:1; transform:none;} }
+    @keyframes fadeRight { from { opacity:0; transform: translateX(20px);} to {opacity:1; transform:none;} }
+
+    .reveal { opacity:0; transform: translateY(10px); will-change: transform, opacity; }
+    .reveal.show { animation: fadeUp .7s ease forwards; }
+    .reveal-left.show { animation: fadeLeft .7s ease forwards; }
+    .reveal-right.show { animation: fadeRight .7s ease forwards; }
+
+    /* Card hover */
+    .card-3d { transition: transform .35s ease, box-shadow .35s ease; }
+    .card-3d:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 18px 40px rgba(15,23,36,0.12); }
+
+    /* Button glow */
+    .btn-primary { background: linear-gradient(90deg,var(--accent-1), #7c3aed); box-shadow: 0 6px 20px rgba(79,70,229,0.18); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 18px 45px rgba(79,70,229,0.22); }
+
+    /* Partner slider */
+    .partner-track { display:flex; gap:3.5rem; align-items:center; transition: transform 0.6s linear; }
+    .partner-item img { filter: grayscale(100%); opacity:.85; transition: filter .3s, opacity .3s, transform .3s; }
+    .partner-item:hover img { filter: none; opacity:1; transform: translateY(-4px); }
+
+    /* Floating CTA & Back to top */
+    .floating { position: fixed; right:1.25rem; bottom:1.25rem; z-index:60; }
+    .ghost { background:transparent; border:1px solid rgba(255,255,255,0.08); }
+
+    /* Mobile nav overlay */
+    .mobile-nav { background: linear-gradient(180deg, rgba(7,9,27,0.95), rgba(7,9,27,0.92)); }
+
+    /* Accessibility focus */
+    :focus { outline: 3px solid rgba(99,102,241,0.18); outline-offset: 3px; }
+
+    /* small utility */
+    .glass { background: var(--glass); border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); }
   </style>
 </head>
-
-<body class="bg-gradient-to-b from-gray-50 to-white text-gray-800">
+<body data-theme="light">
 
   <!-- HEADER -->
-  <header class="sticky top-0 z-50 bg-white/60 backdrop-blur-sm">
-    <div class="container mx-auto px-6 py-4 flex items-center justify-between">
-
-      <!-- Logo -->
-      <a href="#" class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-600 to-indigo-400 flex items-center justify-center text-white font-bold">
-          T
+  <header class="fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between backdrop-blur-sm" role="navigation" aria-label="Main Navigation">
+      <a href="#" class="flex items-center gap-3" aria-label="TripNesia Mitra home">
+        <div class="w-11 h-11 rounded-lg bg-gradient-to-br from-indigo-600 to-indigo-400 flex items-center justify-center text-white font-bold shadow-lg">T</div>
+        <div>
+          <div class="text-lg font-semibold text-indigo-700">TripNesia Mitra</div>
+          <div class="text-xs text-gray-500">Partner Bisnis Wisata</div>
         </div>
-        <span class="text-2xl font-semibold text-indigo-700">TripNesia Mitra</span>
       </a>
 
-      <!-- Menu Desktop -->
-      <nav class="hidden md:flex items-center gap-6">
-        <a href="#keuntungan" class="text-gray-600 hover:text-indigo-600 transition">Keuntungan Mitra</a>
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#keuntungan" class="text-gray-600 hover:text-indigo-600 transition">Keuntungan</a>
         <a href="#cara-kerja" class="text-gray-600 hover:text-indigo-600 transition">Cara Kerja</a>
         <a href="#testimoni" class="text-gray-600 hover:text-indigo-600 transition">Testimoni</a>
-        <a href="/login_mitra.html" class="text-indigo-700 hover:underline">Login</a>
-        <a href="/regist_mitra.html" class="bg-indigo-600 text-white px-4 py-2 rounded-full hover:bg-indigo-700 transition">Daftar Mitra</a>
+        <a href="#faq" class="text-gray-600 hover:text-indigo-600 transition">FAQ</a>
+        <button id="themeToggle" class="ml-2 p-2 rounded-md text-sm bg-white/60 hover:bg-white/70">🌙</button>
+        <a href="/login_mitra.html" class="text-indigo-700 font-medium">Login</a>
+        <a href="/regist_mitra.html" class="ml-2 px-4 py-2 rounded-full text-white btn-primary">Daftar Mitra</a>
       </nav>
 
-      <!-- Mobile Menu -->
-      <div class="md:hidden">
-        <input id="menu-toggle" type="checkbox" class="peer hidden" />
-        <label for="menu-toggle" class="p-2 rounded-md inline-flex items-center justify-center text-gray-700 cursor-pointer">
-          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </label>
+      <!-- Mobile trigger -->
+      <div class="md:hidden flex items-center gap-2">
+        <button id="themeToggleMobile" class="p-2 rounded-md bg-white/60">🌓</button>
+        <button id="mobileBtn" aria-controls="mobileMenu" aria-expanded="false" aria-label="Buka menu" class="p-2 rounded-md bg-white/60">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
       </div>
     </div>
 
-    <!-- Mobile Menu Content -->
-    <div class="peer-checked:block hidden md:hidden bg-white border-t border-gray-100">
-      <div class="px-6 pt-4 pb-6 space-y-3">
-        <a href="#keuntungan" class="block text-gray-700 hover:text-indigo-600">Keuntungan Mitra</a>
-        <a href="#cara-kerja" class="block text-gray-700 hover:text-indigo-600">Cara Kerja</a>
-        <a href="#testimoni" class="block text-gray-700 hover:text-indigo-600">Testimoni</a>
-        <a href="/login_mitra.html" class="block text-indigo-700">Login</a>
-        <a href="/regist_mitra.html" class="block bg-indigo-600 text-white px-4 py-2 rounded-full text-center">Daftar</a>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden">
+      <div class="mobile-nav px-6 pt-6 pb-8 text-white">
+        <a href="#keuntungan" class="block py-3 border-b border-white/6">Keuntungan</a>
+        <a href="#cara-kerja" class="block py-3 border-b border-white/6">Cara Kerja</a>
+        <a href="#testimoni" class="block py-3 border-b border-white/6">Testimoni</a>
+        <a href="#faq" class="block py-3 border-b border-white/6">FAQ</a>
+        <div class="mt-4 flex gap-3">
+          <a href="/login_mitra.html" class="px-4 py-2 rounded bg-white/10">Login</a>
+          <a href="/regist_mitra.html" class="px-4 py-2 rounded bg-indigo-600 text-white">Daftar</a>
+        </div>
       </div>
     </div>
   </header>
 
   <!-- HERO -->
-  <section class="relative h-screen bg-cover bg-center" style="background-image: url('/assets/images/mitra-bg.jpg');">
-    <div class="absolute inset-0 bg-black/40"></div>
+  <main class="mt-20">
+    <section class="hero relative h-[80vh] md:h-screen flex items-center">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/10"></div>
 
-    <div class="relative z-10 flex flex-col justify-center items-center h-full text-white text-center px-6">
-      <h1 class="text-4xl md:text-6xl font-extrabold mb-4 animate-fade-up">
-        Tingkatkan Bisnismu Bersama TripNesia
-      </h1>
+      <div class="max-w-6xl mx-auto px-6 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div class="text-white">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 reveal" data-reveal="up">Tingkatkan Bisnismu<br class="hidden md:block"> Bersama TripNesia</h1>
+            <p class="text-lg md:text-xl text-white/90 mb-6 reveal" data-reveal="up" style="animation-delay:.12s">
+              Bergabung jadi mitra resmi kami untuk menjangkau lebih banyak wisatawan, mengatur pemesanan otomatis, dan meningkatkan pendapatan.
+            </p>
 
-      <p class="text-lg md:text-xl mb-6 opacity-90 animate-fade-up" style="animation-delay: 130ms;">
-        Jadilah Mitra Resmi TripNesia: penyedia paket wisata, transportasi, dan akomodasi.
-      </p>
+            <div class="flex gap-4 items-center">
+              <a href="/regist_mitra.html" class="btn-primary px-6 py-3 rounded-full text-white font-semibold shadow-lg transform transition reveal" data-reveal="up" style="animation-delay:.25s">
+                Mulai Jadi Mitra
+              </a>
+              <a href="#keuntungan" class="text-white/90 underline reveal" data-reveal="up" style="animation-delay:.32s">Pelajari lebih lanjut</a>
+            </div>
+          </div>
 
-      <a href="/regist_mitra.html" class="bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:bg-indigo-700 hover:-translate-y-1 transition animate-fade-up" style="animation-delay: 250ms;">
-        Daftar Jadi Mitra
-      </a>
+        
+          </div>
+        </div>
+      </div>
+
+      <!-- subtle decorative gradient -->
+      <div class="absolute right-8 bottom-8 w-44 h-44 rounded-full bg-gradient-to-tr from-[#7c3aed]/30 to-[#06b6d4]/20 blur-3xl pointer-events-none"></div>
+    </section>
+
+    <!-- KEUNTUNGAN -->
+    <section id="keuntungan" class="py-20">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 reveal" data-reveal="up">Keuntungan Menjadi Mitra TripNesia</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <article class="bg-[var(--card,#fff)] p-8 rounded-2xl shadow card-3d reveal-left" data-reveal="left">
+            <h3 class="text-indigo-600 font-semibold text-xl mb-2">Pasar Nasional</h3>
+            <p class="text-[var(--muted,#6b7280)]">Produk Anda tampil di seluruh Indonesia dengan eksposur tinggi.</p>
+          </article>
+
+          <article class="bg-[var(--card,#fff)] p-8 rounded-2xl shadow card-3d reveal" data-reveal="up" style="animation-delay:.06s">
+            <h3 class="text-indigo-600 font-semibold text-xl mb-2">Pemesanan Otomatis</h3>
+            <p class="text-[var(--muted,#6b7280)]">Sistem pemesanan terintegrasi dan pembayaran aman.</p>
+          </article>
+
+          <article class="bg-[var(--card,#fff)] p-8 rounded-2xl shadow card-3d reveal-right" data-reveal="right">
+            <h3 class="text-indigo-600 font-semibold text-xl mb-2">Pendapatan Stabil</h3>
+            <p class="text-[var(--muted,#6b7280)]">Kelola jadwal dan meningkatkan okupansi paket wisata Anda.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARA KERJA -->
+    <section id="cara-kerja" class="py-20 bg-gradient-to-b from-white to-gray-50">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 reveal" data-reveal="up">Cara Kerja</h2>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div class="p-6 bg-[var(--card,#fff)] rounded-xl shadow card-3d reveal-left" data-reveal="left">
+            <div class="w-12 h-12 bg-indigo-600 rounded-full text-white flex items-center justify-center font-bold mb-3">1</div>
+            <h4 class="font-semibold">Daftar Akun</h4>
+            <p class="text-sm text-[var(--muted,#6b7280)]">Buat akun dalam beberapa menit.</p>
+          </div>
+          <div class="p-6 bg-[var(--card,#fff)] rounded-xl shadow card-3d reveal" data-reveal="up" style="animation-delay:.04s">
+            <div class="w-12 h-12 bg-indigo-600 rounded-full text-white flex items-center justify-center font-bold mb-3">2</div>
+            <h4 class="font-semibold">Verifikasi</h4>
+            <p class="text-sm text-[var(--muted,#6b7280)]">Unggah identitas & dokumen usaha.</p>
+          </div>
+          <div class="p-6 bg-[var(--card,#fff)] rounded-xl shadow card-3d reveal" data-reveal="up" style="animation-delay:.08s">
+            <div class="w-12 h-12 bg-indigo-600 rounded-full text-white flex items-center justify-center font-bold mb-3">3</div>
+            <h4 class="font-semibold">Upload Paket</h4>
+            <p class="text-sm text-[var(--muted,#6b7280)]">Tambahkan paket dan foto menarik.</p>
+          </div>
+          <div class="p-6 bg-[var(--card,#fff)] rounded-xl shadow card-3d reveal-right" data-reveal="right">
+            <div class="w-12 h-12 bg-indigo-600 rounded-full text-white flex items-center justify-center font-bold mb-3">4</div>
+            <h4 class="font-semibold">Terima Pesanan</h4>
+            <p class="text-sm text-[var(--muted,#6b7280)]">Terima order & kelola jadwal dengan mudah.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONI -->
+    <section id="testimoni" class="py-20">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 reveal" data-reveal="up">Apa Kata Mitra?</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <blockquote class="bg-[var(--card,#fff)] p-6 rounded-xl shadow card-3d reveal-left" data-reveal="left">
+            <p class="italic text-[var(--muted,#6b7280)]">"Pesanan meningkat 3x sejak bergabung!"</p>
+            <cite class="mt-4 block font-semibold">— Mitra Bali Holiday</cite>
+          </blockquote>
+          <blockquote class="bg-[var(--card,#fff)] p-6 rounded-xl shadow card-3d reveal" data-reveal="up" style="animation-delay:.04s">
+            <p class="italic text-[var(--muted,#6b7280)]">"Sistem aman dan bantu kelola order."</p>
+            <cite class="mt-4 block font-semibold">— Bromo Travel</cite>
+          </blockquote>
+          <blockquote class="bg-[var(--card,#fff)] p-6 rounded-xl shadow card-3d reveal-right" data-reveal="right">
+            <p class="italic text-[var(--muted,#6b7280)]">"Customer service sangat responsif."</p>
+            <cite class="mt-4 block font-semibold">— Flores Tour</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- WAVE DIVIDER -->
+    <div class="relative">
+      <svg class="w-full h-20 md:h-28 text-gray-100" viewBox="0 0 1440 320" preserveAspectRatio="none">
+        <path fill="currentColor" d="M0,224L48,197.3C96,171,192,117,288,106.7C384,96,480,128,576,138.7C672,149,768,139,864,144C960,149,1056,171,1152,160C1248,149,1344,107,1392,85.3L1440,64L1440,320L0,320Z"></path>
+      </svg>
     </div>
-  </section>
 
-  <!-- KEUNTUNGAN -->
-  <section id="keuntungan" class="py-20">
-    <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Keuntungan Menjadi Mitra TripNesia</h2>
+    <!-- PARTNER SLIDER -->
+    <section class="bg-gray-900 py-14">
+      <div class="max-w-6xl mx-auto px-6 text-center">
+        <h3 class="text-white text-2xl font-bold mb-8 reveal" data-reveal="up">Dipercaya Oleh Mitra</h3>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-        <div class="bg-white p-8 rounded-xl shadow hover:-translate-y-2 transition">
-          <h3 class="font-bold text-xl mb-2">Pasar Lebih Luas</h3>
-          <p class="text-gray-600">Bisnismu tampil di seluruh Indonesia dan menjangkau ribuan wisatawan.</p>
-        </div>
-        <div class="bg-white p-8 rounded-xl shadow hover:-translate-y-2 transition">
-          <h3 class="font-bold text-xl mb-2">Pemesanan Mudah</h3>
-          <p class="text-gray-600">Semua transaksi dan pemesanan dikelola otomatis melalui sistem TripNesia.</p>
-        </div>
-        <div class="bg-white p-8 rounded-xl shadow hover:-translate-y-2 transition">
-          <h3 class="font-bold text-xl mb-2">Pendapatan Stabil</h3>
-          <p class="text-gray-600">Jadwal trip lebih teratur dengan aliran pelanggan yang konsisten.</p>
+        <div class="overflow-hidden">
+          <div id="partnerTrack" class="partner-track" style="transform: translateX(0);">
+            <!-- gunakan gambar logo di /assets/logo/*.png -->
+            <div class="partner-item"><img src="/assets/logo/1.png" alt="partner 1" class="h-12"/></div>
+            <div class="partner-item"><img src="/assets/logo/2.png" alt="partner 2" class="h-12"/></div>
+            <div class="partner-item"><img src="/assets/logo/3.png" alt="partner 3" class="h-12"/></div>
+            <div class="partner-item"><img src="/assets/logo/4.png" alt="partner 4" class="h-12"/></div>
+            <div class="partner-item"><img src="/assets/logo/5.png" alt="partner 5" class="h-12"/></div>
+            <!-- duplicate for smooth loop -->
+            <div class="partner-item"><img src="/assets/logo/1.png" alt="partner 1" class="h-12"/></div>
+            <div class="partner-item"><img src="/assets/logo/2.png" alt="partner 2" class="h-12"/></div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CARA KERJA -->
-  <section id="cara-kerja" class="py-20 bg-gray-50">
-    <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold text-center text-gray-800 mb-16">Cara Kerja Menjadi Mitra</h2>
+    <!-- FAQ (Accessible accordion) -->
+    <section id="faq" class="py-20 bg-gray-50">
+      <div class="max-w-4xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 reveal" data-reveal="up">Pertanyaan yang Sering Ditanyakan</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+        <div id="faqList" class="space-y-4">
+          <!-- Item template -->
+          <div class="bg-[var(--card,#fff)] rounded-xl shadow p-4">
+            <button class="w-full text-left faq-toggle flex justify-between items-center gap-4 py-3 px-2 rounded focus:outline-none" aria-expanded="false">
+              <span class="font-medium">Apa itu TripNesia Mitra?</span>
+              <span class="faq-icon text-indigo-600">+</span>
+            </button>
+            <div class="faq-panel mt-2 text-[var(--muted,#6b7280)] hidden">
+              TripNesia Mitra adalah platform untuk memasarkan paket wisata & layanan terkait secara nasional.
+            </div>
+          </div>
 
-        <div class="bg-white p-6 rounded-xl shadow">
-          <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg">1</div>
-          <h3 class="font-bold mb-2">Daftar Akun</h3>
-          <p class="text-gray-600 text-sm">Buat akun mitra hanya dalam beberapa menit.</p>
+          <div class="bg-[var(--card,#fff)] rounded-xl shadow p-4">
+            <button class="w-full text-left faq-toggle flex justify-between items-center gap-4 py-3 px-2 rounded focus:outline-none" aria-expanded="false">
+              <span class="font-medium">Berapa biaya bergabung?</span>
+              <span class="faq-icon text-indigo-600">+</span>
+            </button>
+            <div class="faq-panel mt-2 text-[var(--muted,#6b7280)] hidden">
+              Pendaftaran gratis; biaya muncul pada fee transaksi sesuai kesepakatan.
+            </div>
+          </div>
+
+          <div class="bg-[var(--card,#fff)] rounded-xl shadow p-4">
+            <button class="w-full text-left faq-toggle flex justify-between items-center gap-4 py-3 px-2 rounded focus:outline-none" aria-expanded="false">
+              <span class="font-medium">Bagaimana cara menambah paket?</span>
+              <span class="faq-icon text-indigo-600">+</span>
+            </button>
+            <div class="faq-panel mt-2 text-[var(--muted,#6b7280)] hidden">
+              Setelah login, gunakan menu 'Paket Saya' pada dashboard untuk meng-upload paket lengkap dengan harga dan foto.
+            </div>
+          </div>
         </div>
-
-        <div class="bg-white p-6 rounded-xl shadow">
-          <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg">2</div>
-          <h3 class="font-bold mb-2">Verifikasi</h3>
-          <p class="text-gray-600 text-sm">Upload identitas & data usaha untuk verifikasi.</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-xl shadow">
-          <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg">3</div>
-          <h3 class="font-bold mb-2">Upload Paket</h3>
-          <p class="text-gray-600 text-sm">Tambahkan paket wisata atau layanan yang kamu tawarkan.</p>
-        </div>
-
-        <div class="bg-white p-6 rounded-xl shadow">
-          <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg">4</div>
-          <h3 class="font-bold mb-2">Mulai Terima Pesanan</h3>
-          <p class="text-gray-600 text-sm">Dapatkan pelanggan dari seluruh Indonesia.</p>
-        </div>
-
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- TESTIMONI -->
-  <section id="testimoni" class="py-20">
-    <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Testimoni Mitra TripNesia</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-
-        <div class="bg-white p-8 rounded-lg shadow-lg">
-          <p class="text-gray-600 italic mb-4">"Sejak bergabung dengan TripNesia, pesanan paket wisata saya naik 3x lipat!"</p>
-          <p class="font-semibold text-gray-800">— Mitra Bali Holiday</p>
+    <!-- FOOTER PREMIUM -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+      <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h4 class="text-white text-xl font-bold">TripNesia Mitra</h4>
+          <p class="mt-2 text-sm text-gray-400">Platform partner bisnis wisata terpercaya sejak 2020.</p>
+          <div class="flex gap-3 mt-4">
+            <a class="text-gray-400 hover:text-white" href="#" aria-label="Instagram">📸</a>
+            <a class="text-gray-400 hover:text-white" href="#" aria-label="Facebook">📘</a>
+            <a class="text-gray-400 hover:text-white" href="#" aria-label="YouTube">🎥</a>
+          </div>
         </div>
 
-        <div class="bg-white p-8 rounded-lg shadow-lg">
-          <p class="text-gray-600 italic mb-4">"Sistemnya mudah digunakan, pembayaran cepat, dan sangat membantu bisnis saya."</p>
-          <p class="font-semibold text-gray-800">— Mitra Bromo Travel</p>
+        <div>
+          <h5 class="text-white font-semibold mb-3">Menu</h5>
+          <ul class="text-sm text-gray-400 space-y-2">
+            <li><a href="#keuntungan" class="hover:text-white">Keuntungan</a></li>
+            <li><a href="#cara-kerja" class="hover:text-white">Cara Kerja</a></li>
+            <li><a href="#testimoni" class="hover:text-white">Testimoni</a></li>
+            <li><a href="#faq" class="hover:text-white">FAQ</a></li>
+          </ul>
         </div>
 
-        <div class="bg-white p-8 rounded-lg shadow-lg">
-          <p class="text-gray-600 italic mb-4">"Layanan customer servicenya luar biasa. Bisnis saya berkembang pesat."</p>
-          <p class="font-semibold text-gray-800">— Mitra Flores Tour</p>
-        </div>
-
-      </div>
-
-      <div class="flex justify-center mt-10">
-        <a href="/testimoni_mitra.html" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full font-semibold shadow-lg transition">Lihat Testimoni Lainnya</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="bg-gray-900 text-gray-300 py-8">
-    <div class="container mx-auto px-6 text-center">
-      <div class="md:flex md:justify-between md:items-center">
-        <div class="mb-4 md:mb-0">
-          <a href="#" class="text-2xl font-bold text-white">TripNesia Mitra</a>
-          <p class="text-gray-400 text-sm">Platform partner bisnis wisata terpercaya sejak 2020</p>
-        </div>
-
-        <div class="space-x-4">
-          <a href="#keuntungan" class="text-gray-300 hover:text-white">Keuntungan</a>
-          <a href="#cara-kerja" class="text-gray-300 hover:text-white">Cara Kerja</a>
-          <a href="#testimoni" class="text-gray-300 hover:text-white">Testimoni</a>
+        <div>
+          <h5 class="text-white font-semibold mb-3">Bantuan</h5>
+          <ul class="text-sm text-gray-400 space-y-2">
+            <li><a href="#" class="hover:text-white">Pusat Bantuan</a></li>
+            <li><a href="#" class="hover:text-white">Syarat & Ketentuan</a></li>
+            <li><a href="#" class="hover:text-white">Kebijakan Privasi</a></li>
+          </ul>
         </div>
       </div>
 
-      <div class="mt-6 text-gray-500 text-sm">
-        &copy; TripNesia Mitra 2025. All Rights Reserved.
-      </div>
-    </div>
-  </footer>
+      <div class="text-center text-gray-500 text-sm mt-8">© 2025 TripNesia Mitra — All Rights Reserved.</div>
+    </footer>
+  </main>
 
+  <!-- FLOATING CTA & BACK TO TOP -->
+  <div class="floating flex flex-col items-end gap-3">
+    <a href="/regist_mitra.html" class="btn-primary px-4 py-2 rounded-full text-white shadow-lg">⚡ Daftar Sekarang</a>
+    <button id="backTop" title="Kembali ke atas" class="bg-white/90 text-gray-800 px-3 py-2 rounded-full shadow">↑</button>
+  </div>
+
+  <!-- SCRIPTS: interactions, reveal, slider, faq, theme -->
+  <script>
+    // ===== Theme toggle (persist to localStorage) =====
+    const root = document.body;
+    const themeToggle = document.getElementById('themeToggle');
+    const themeToggleMobile = document.getElementById('themeToggleMobile');
+    function applyTheme(theme){
+      root.setAttribute('data-theme', theme);
+      if(theme === 'dark'){
+        document.documentElement.style.background = '#06070c';
+      } else {
+        document.documentElement.style.background = '';
+      }
+      localStorage.setItem('tn-theme', theme);
+      // change icon
+      if(themeToggle) themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+      if(themeToggleMobile) themeToggleMobile.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+    const saved = localStorage.getItem('tn-theme') || 'light';
+    applyTheme(saved);
+    if(themeToggle) themeToggle.addEventListener('click', ()=> applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+    if(themeToggleMobile) themeToggleMobile.addEventListener('click', ()=> applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+
+    // ===== Mobile menu toggle =====
+    const mobileBtn = document.getElementById('mobileBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileBtn?.addEventListener('click', () => {
+      const open = mobileMenu.classList.toggle('hidden');
+      // invert: show -> remove hidden
+      mobileBtn.setAttribute('aria-expanded', String(!mobileMenu.classList.contains('hidden')));
+    });
+
+    // ===== Scroll reveal using IntersectionObserver =====
+    const reveals = document.querySelectorAll('[data-reveal]');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          const el = entry.target;
+          const dir = el.getAttribute('data-reveal');
+          if(dir === 'left') el.classList.add('reveal-left','show');
+          else if(dir === 'right') el.classList.add('reveal-right','show');
+          else el.classList.add('reveal','show');
+          obs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => obs.observe(el));
+
+    // ===== Partner slider (simple horizontal loop) =====
+    const track = document.getElementById('partnerTrack');
+    let speed = 0.4; // px per frame-ish
+    let pos = 0;
+    let frame;
+    function step(){
+      pos -= speed;
+      // when scrolled past half (we duplicated items), reset
+      const max = track.scrollWidth / 2;
+      if(Math.abs(pos) >= max) pos = 0;
+      track.style.transform = `translateX(${pos}px)`;
+      frame = requestAnimationFrame(step);
+    }
+    // start after images loaded
+    window.addEventListener('load', () => { frame = requestAnimationFrame(step); });
+    // pause on hover
+    track.addEventListener('mouseenter', ()=> { speed = 0; });
+    track.addEventListener('mouseleave', ()=> { speed = 0.4; });
+
+    // ===== FAQ accordion (accessible) =====
+    document.querySelectorAll('.faq-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        // close all siblings if you want single-open
+        document.querySelectorAll('.faq-toggle').forEach(b => {
+          b.setAttribute('aria-expanded','false');
+          b.querySelector('.faq-icon').textContent = '+';
+          b.nextElementSibling.classList.add('hidden');
+        });
+        // toggle this
+        if(!expanded){
+          btn.setAttribute('aria-expanded','true');
+          btn.querySelector('.faq-icon').textContent = '−';
+          btn.nextElementSibling.classList.remove('hidden');
+        } else {
+          btn.setAttribute('aria-expanded','false');
+          btn.querySelector('.faq-icon').textContent = '+';
+          btn.nextElementSibling.classList.add('hidden');
+        }
+      });
+      // keyboard support
+      btn.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          btn.click();
+        }
+      });
+    });
+
+    // ===== Back to top =====
+    const backTop = document.getElementById('backTop');
+    backTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+    // ===== Reduce motion: respect prefers-reduced-motion =====
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(prefersReduced){
+      // stop slider and reveal animations
+      cancelAnimationFrame(frame);
+      document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+        el.classList.add('show');
+      });
+    }
+  </script>
 </body>
 </html>

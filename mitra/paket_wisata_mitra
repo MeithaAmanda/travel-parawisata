@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Paket Wisata - TripNesia Mitra</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/assets/css/style-paket-mitra.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-poppins">
+
+    <nav class="bg-white border-b sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-indigo-600 rounded flex items-center justify-center text-white font-bold">T</div>
+                <span class="font-bold text-lg text-indigo-900">TripNesia <span class="text-gray-400 font-normal">| Mitra</span></span>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="text-right hidden sm:block">
+                    <p class="text-sm font-semibold text-gray-900">CV. Petualang</p>
+                    <p class="text-xs text-green-600">● Online</p>
+                </div>
+                <img src="https://ui-avatars.com/api/?name=Petualang&background=random" class="w-9 h-9 rounded-full border border-gray-200">
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">Daftar Paket Wisata</h1>
+                <p class="text-gray-500 text-sm mt-1">Kelola katalog wisata yang Anda tawarkan kepada pelanggan.</p>
+            </div>
+            <button onclick="openModal()" class="btn-primary flex items-center gap-2 shadow-lg shadow-indigo-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                Tambah Paket Baru
+            </button>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            
+            <div class="flex bg-gray-100 p-1 rounded-lg w-full md:w-auto">
+                <button onclick="filterStatus('all')" class="filter-tab active" id="tab-all">Semua</button>
+                <button onclick="filterStatus('active')" class="filter-tab" id="tab-active">Tayang</button>
+                <button onclick="filterStatus('review')" class="filter-tab" id="tab-review">Review</button>
+                <button onclick="filterStatus('draft')" class="filter-tab" id="tab-draft">Draft</button>
+            </div>
+
+            <div class="relative w-full md:w-72">
+                <input type="text" id="searchInput" placeholder="Cari nama paket..." class="w-full pl-10 pr-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute left-3 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+        </div>
+
+        <div id="packageGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+
+        <div class="mt-8 flex justify-between items-center">
+            <p class="text-sm text-gray-500">Menampilkan <span id="showingCount" class="font-bold">0</span> paket</p>
+            <div class="flex gap-2">
+                <button class="px-4 py-2 border rounded-lg text-sm hover:bg-gray-50 disabled:opacity-50">Sebelumnya</button>
+                <button class="px-4 py-2 border rounded-lg text-sm hover:bg-gray-50 disabled:opacity-50">Selanjutnya</button>
+            </div>
+        </div>
+
+    </main>
+
+    <div id="packageModal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" onclick="closeModal()"></div>
+
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <div class="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+                <div class="bg-white px-6 py-6">
+                    <div class="flex justify-between items-center mb-5">
+                        <h3 class="text-xl font-bold text-gray-900" id="modalTitle">Tambah Paket Baru</h3>
+                        <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">✕</button>
+                    </div>
+
+                    <form id="packageForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="col-span-2">
+                            <label class="form-label">Nama Paket</label>
+                            <input type="text" id="inputName" class="form-input" placeholder="Contoh: Open Trip Bromo Midnight" required>
+                        </div>
+                        
+                        <div>
+                            <label class="form-label">Harga (Rp)</label>
+                            <input type="number" id="inputPrice" class="form-input" placeholder="500000" required>
+                        </div>
+
+                        <div>
+                            <label class="form-label">Durasi</label>
+                            <input type="text" id="inputDuration" class="form-input" placeholder="3 Hari 2 Malam" required>
+                        </div>
+
+                        <div>
+                            <label class="form-label">Lokasi</label>
+                            <input type="text" id="inputLocation" class="form-input" placeholder="Malang, Jawa Timur">
+                        </div>
+
+                        <div>
+                            <label class="form-label">Status</label>
+                            <select id="inputStatus" class="form-input">
+                                <option value="active">Tayangkan Sekarang</option>
+                                <option value="review">Minta Review Admin</option>
+                                <option value="draft">Simpan sebagai Draft</option>
+                            </select>
+                        </div>
+
+                        <div class="col-span-2">
+                            <label class="form-label">URL Gambar Cover</label>
+                            <input type="text" id="inputImage" class="form-input" placeholder="https://...">
+                        </div>
+
+                        <div class="col-span-2">
+                            <label class="form-label">Deskripsi Singkat</label>
+                            <textarea id="inputDesc" rows="3" class="form-input" placeholder="Jelaskan highlight dari paket ini..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="bg-gray-50 px-6 py-4 flex flex-row-reverse gap-2">
+                    <button type="button" onclick="savePackage()" class="btn-primary w-auto">Simpan Paket</button>
+                    <button type="button" onclick="closeModal()" class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50">Batal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/js/script-paket-mitra.js"></script>
+</body>
+</html>

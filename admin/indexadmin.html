@@ -3,92 +3,119 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Admin</title>
+  <title>Dashboard Admin Modern</title>
   <link rel="stylesheet" href="/assets/css/admin.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <!-- side bar -->
   <aside class="sidebar" id="sidebar">
-
-    <h2>Admin Panel</h2>
-
-    <div class="nav-section">
-      <p class="nav-title">MENU UTAMA</p>
-
-      <div class="nav-list">
-        <a href="#" class="active">Dashboard</a>
+    
+    <div class="sidebar-header">
+      <div class="logo">
+        <i class="ri-dashboard-3-line"></i>
+        <span>TripNesia</span>
       </div>
     </div>
 
-    <div class="nav-section">
-      <p class="nav-title">USER</p>
+    <div class="sidebar-menu">
+      
+      <p class="menu-label">MENU UTAMA</p>
+      <a href="#" class="menu-item active">
+        <i class="ri-home-4-line"></i>
+        <span>Dashboard</span>
+      </a>
 
+      <p class="menu-label">PENGGUNA</p>
       <div class="dropdown">
-        <div class="dropdown-btn">
-          Kelola User
-          <span>▼</span>
+        <div class="menu-item dropdown-btn">
+          <div class="menu-left">
+            <i class="ri-user-settings-line"></i>
+            <span>Kelola User</span>
+          </div>
+          <i class="ri-arrow-down-s-line arrow"></i>
         </div>
-        <div class="dropdown-items">
+        <div class="dropdown-content">
           <a href="#">Data User</a>
           <a href="#">Tambah User</a>
+          <a href="#">Role & Akses</a>
         </div>
       </div>
-    </div>
 
-    <div class="nav-section">
-      <p class="nav-title">WISATA</p>
-
+      <p class="menu-label">WISATA & PRODUK</p>
       <div class="dropdown">
-        <div class="dropdown-btn">
-          Kelola Paket Wisata
-          <span>▼</span>
+        <div class="menu-item dropdown-btn">
+          <div class="menu-left">
+            <i class="ri-map-pin-line"></i>
+            <span>Paket Wisata</span>
+          </div>
+          <i class="ri-arrow-down-s-line arrow"></i>
         </div>
-        <div class="dropdown-items">
-          <a href="#">Semua Paket</a>
+        <div class="dropdown-content">
+          <a href="#">Daftar Paket</a>
           <a href="#">Tambah Paket</a>
+          <a href="#">Kategori</a>
         </div>
       </div>
-    </div>
 
-    <div class="nav-section">
-      <p class="nav-title">LAINNYA</p>
-      <div class="nav-list">
-        <a href="#">Transaksi</a>
-        <a href="#">Pengaturan</a>
-      </div>
-    </div>
+      <p class="menu-label">LAINNYA</p>
+      <a href="#" class="menu-item">
+        <i class="ri-money-dollar-circle-line"></i>
+        <span>Transaksi</span>
+      </a>
+      <a href="#" class="menu-item">
+        <i class="ri-settings-3-line"></i>
+        <span>Pengaturan</span>
+      </a>
 
+    </div>
   </aside>
 
-  <!-- main -->
   <main class="main" id="main">
-
+    
     <div class="top-bar">
-      <button class="toggle-btn" id="toggleBtn">☰</button>
-      <h1 class="h1">Dashboard Admin</h1>
+      <button class="toggle-btn" id="toggleBtn">
+        <i class="ri-menu-line"></i>
+      </button>
+      <div class="greeting">
+        <h1 class="h1">Dashboard</h1>
+        <p class="date-text">Kelola sistem dengan mudah</p>
+      </div>
     </div>
 
     <div class="cards">
       <div class="card">
-        <p class="card-title">Total User</p>
-        <p class="card-number stat-number-users">0</p>
+        <div class="card-icon user"><i class="ri-user-line"></i></div>
+        <div>
+          <p class="card-title">Total User</p>
+          <p class="card-number stat-number-users">0</p>
+        </div>
       </div>
 
       <div class="card">
-        <p class="card-title">Paket Wisata</p>
-        <p class="card-number stat-number-paket">0</p>
+        <div class="card-icon trip"><i class="ri-map-2-line"></i></div>
+        <div>
+          <p class="card-title">Paket Wisata</p>
+          <p class="card-number stat-number-paket">0</p>
+        </div>
       </div>
 
       <div class="card">
-        <p class="card-title">Transaksi</p>
-        <p class="card-number stat-number-transaksi">0</p>
+        <div class="card-icon money"><i class="ri-wallet-3-line"></i></div>
+        <div>
+          <p class="card-title">Transaksi</p>
+          <p class="card-number stat-number-transaksi">0</p>
+        </div>
       </div>
 
       <div class="card">
-        <p class="card-title">Mitra Terdaftar</p>
-        <p class="card-number stat-number-mitra">0</p>
+        <div class="card-icon partner"><i class="ri-shake-hands-line"></i></div>
+        <div>
+          <p class="card-title">Mitra</p>
+          <p class="card-number stat-number-mitra">0</p>
+        </div>
       </div>
     </div>
 

@@ -4,39 +4,165 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Mitra — TripNesia</title>
+  <title>Login Mitra — TripNesia Ultra Premium</title>
   <script src="https://cdn.tailwindcss.com"></script>
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    body { font-family: 'Poppins', sans-serif; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    /* Background Soft Blue Gradient Animation */
+    .ultra-bg {
+      background: linear-gradient(145deg, #dbeafe, #ffffff, #bfdbfe);
+      background-size: 250% 250%;
+      animation: ultraMove 12s ease-in-out infinite;
+    }
+
+    @keyframes ultraMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating Particles */
+    .particle {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      filter: blur(6px);
+      animation: floatParticle 12s infinite ease-in-out;
+    }
+
+    @keyframes floatParticle {
+      0% { transform: translateY(0) translateX(0); opacity: 0.5; }
+      50% { transform: translateY(-60px) translateX(20px); opacity: 1; }
+      100% { transform: translateY(0) translateX(0); opacity: 0.5; }
+    }
+
+    /* Glass 3D Card */
+    .ultra-card {
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      box-shadow: 
+        0 20px 40px rgba(0, 122, 255, 0.15),
+        inset 0 0 20px rgba(255, 255, 255, 0.4);
+      animation: cardFade 0.9s ease forwards, breathing 6s ease-in-out infinite;
+      opacity: 0;
+    }
+
+    @keyframes cardFade {
+      from { opacity: 0; transform: translateY(35px) scale(0.97); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes breathing {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.015); }
+      100% { transform: scale(1); }
+    }
+
+    /* Floating Logo */
+    .float-logo {
+      animation: logoMove 5s ease-in-out infinite;
+    }
+
+    @keyframes logoMove {
+      0% { transform: translate(-50%, -50%) translateY(0); }
+      50% { transform: translate(-50%, -50%) translateY(-10px); }
+      100% { transform: translate(-50%, -50%) translateY(0); }
+    }
+
+    /* Inputs Premium Blue Glow */
+    .input-ultra {
+      transition: .25s;
+    }
+
+    .input-ultra:focus {
+      border-color: #60a5fa;
+      box-shadow: 0 0 15px rgba(96, 165, 250, 0.7);
+    }
+
+    /* Button Glow */
+    .btn-ultra {
+      transition: .25s;
+      background: linear-gradient(to right, #60a5fa, #3b82f6);
+      box-shadow: 0 0 15px rgba(96, 165, 250, 0.7);
+    }
+
+    .btn-ultra:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 25px rgba(96, 165, 250, 0.9);
+    }
+
   </style>
 </head>
 
-<body class="bg-gradient-to-br from-indigo-600 to-indigo-400 h-screen flex items-center justify-center">
+<body class="ultra-bg h-screen flex items-center justify-center relative">
 
-  <div class="bg-white rounded-xl shadow-lg p-10 w-full max-w-md">
-    <h2 class="text-3xl font-bold text-center text-indigo-600 mb-6">Login Mitra</h2>
+  <!-- Floating Particles (8 pcs) -->
+  <div class="particle" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+  <div class="particle" style="top: 30%; left: 75%; animation-delay: 1s;"></div>
+  <div class="particle" style="top: 50%; left: 10%; animation-delay: 2s;"></div>
+  <div class="particle" style="top: 70%; left: 65%; animation-delay: 3s;"></div>
+  <div class="particle" style="top: 15%; left: 55%; animation-delay: 1.5s;"></div>
+  <div class="particle" style="top: 85%; left: 20%; animation-delay: 2.5s;"></div>
 
-    <form action="#" method="POST" class="space-y-5">
+  <!-- Floating Logo -->
+  <div class="absolute top-24 left-1/2 -translate-x-1/2 float-logo">
+    <div class="w-24 h-24 bg-white/40 backdrop-blur-xl border border-white/70 rounded-full flex items-center justify-center shadow-2xl">
+      <span class="text-blue-500 text-4xl font-bold">TN</span>
+    </div>
+  </div>
 
+  <!-- Login Card -->
+  <div class="ultra-card w-full max-w-md rounded-3xl p-10 text-blue-900">
+
+    <h2 class="text-3xl font-bold text-center tracking-wide mb-2">
+      Login Mitra
+    </h2>
+
+    <p class="text-center text-blue-700/70 mb-8">
+      Jadilah Bagian Dari Kami dan Mulai Perjalanan Bersama TripNesia!
+    </p>
+
+    <form action="#" method="POST" class="space-y-6">
+
+      <!-- Email -->
       <div>
-        <label class="text-gray-600 text-sm">Email</label>
-        <input type="email" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-indigo-500" placeholder="Email Mitra">
+        <label class="text-blue-700 text-sm">Email</label>
+        <div class="flex items-center gap-3 bg-white/30 p-3 rounded-lg mt-1 border border-white/50 focus-within:border-blue-400">
+          <span class="text-blue-500">📧</span>
+          <input type="email" class="bg-transparent w-full outline-none text-blue-700 placeholder-blue-500/50 input-ultra"
+            placeholder="Email Mitra">
+        </div>
       </div>
 
+      <!-- Password -->
       <div>
-        <label class="text-gray-600 text-sm">Password</label>
-        <input type="password" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-indigo-500" placeholder="Password">
+        <label class="text-blue-700 text-sm">Password</label>
+        <div class="flex items-center gap-3 bg-white/30 p-3 rounded-lg mt-1 border border-white/50 focus-within:border-blue-400">
+          <span class="text-blue-500">🔒</span>
+          <input type="password" class="bg-transparent w-full outline-none text-blue-700 placeholder-blue-500/50 input-ultra"
+            placeholder="Password">
+        </div>
       </div>
 
-      <button class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition font-semibold">
+      <!-- Button -->
+      <button
+        class="w-full text-white py-3 rounded-lg btn-ultra font-semibold shadow-lg tracking-wide">
         Login
       </button>
 
-      <p class="text-center text-gray-600 text-sm mt-4">
-        Belum punya akun? 
-        <a href="regist_mitra.html" class="text-indigo-600 font-semibold hover:underline">Daftar</a>
+      <p class="text-center text-blue-700/70 text-sm mt-4">
+        Belum punya akun?
+        <a href="regist_mitra.html" class="text-blue-600 underline hover:text-blue-800">Daftar</a>
       </p>
 
     </form>
